@@ -3,8 +3,8 @@ import {IoIosArrowBack,IoIosArrowForward} from 'react-icons/io'
 
 const WeatherDetails = () => {
   return (
-    <div className='w-full lg:w-[350px] lg:h-full  h-fit text-center px-4 py-8 lg:border-l-2 border-t-2'>
-    <div className='flex flex-row justify-around items-center gap-8'>
+    <div className='w-full lg:w-[350px] lg:h-full  h-fit text-center px-4 py-6 lg:border-l-2 border-t-2'>
+    <div className='flex flex-row justify-around items-center gap-8 h-[50px]'>
       <IoIosArrowBack className="w-6 h-6" /> <h2 className='font-medium text-xl capitalize'>This Week</h2> <IoIosArrowForward className="w-6 h-6" />
     </div>
   </div>

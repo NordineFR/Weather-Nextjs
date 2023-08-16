@@ -11,7 +11,7 @@ const GeneralWeather = () => {
     color: ''
   });
 
-  const weatherStatus = 'cloudy';
+  const weatherStatus = 'sunny';
 
   useEffect(() => {
     const weatherStyles = getWeatherStyles(weatherStatus);
@@ -38,7 +38,7 @@ const GeneralWeather = () => {
   };
 
   return (
-    <div className="m-6 p-6 rounded-lg" style={styles}>
+    <div className="my-6 p-6 rounded-lg h-96" style={styles}>
       GeneralWeather
     </div>
   );

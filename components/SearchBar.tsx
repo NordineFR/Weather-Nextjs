@@ -11,10 +11,10 @@ const SearchBar = () => {
         router.push(`/?search=${searchTerm}`);
       }
   return (
-    <form onSubmit={handleSubmit} autoComplete='off' className='p-2 text-gray-300 focus-within:text-gray-600'>
+    <form onSubmit={handleSubmit} autoComplete='off' className=' text-gray-300 focus-within:text-gray-600'>
         <label htmlFor="search-field" className='sr-only'>Search City Weather </label>
         <div className='flex flex-row justify-start items-center'>
-            <FiSearch className="w-5 h-5 ml-4 text-black" />
+            <FiSearch className="w-5 h-5 text-black" />
             <input type="search" autoComplete='off' id="search-field"
             placeholder='Search City Weather'
             value={searchTerm}

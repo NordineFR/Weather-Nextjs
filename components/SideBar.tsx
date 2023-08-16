@@ -23,7 +23,7 @@ const SideBar = ()=> {
     const [mobileMenuOpen,setMobileMenuOpen] = useState(false);
   return (
     <>
-        <div className="flex flex-col md:w-[240px]  w-[70px] py-10 md:px-4 px-1 bg-white border-r-2 transition-all">
+        <div className="flex flex-col md:w-[240px]  w-[70px] py-6 md:px-4 px-1 bg-white border-r-2 transition-all">
             <div className="flex flex-row justify-center items-center gap-2">
                 <Image src="/images/logo.svg" alt="logo" className="h-14 object-contain" width={50} height={50} /> 
                 <h3 className="font-bold text-xl hidden md:inline">Weather</h3>

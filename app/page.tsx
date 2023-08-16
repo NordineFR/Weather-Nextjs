@@ -9,7 +9,7 @@ import GeneralWeatherCard from '@/components/GeneralWeatherCard'
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col lg:flex-row bg-gradient-to-br bg-white overflow-y-auto">
-      <div className='flex-1 h-full'>
+      <div className='flex-1 h-full p-6'>
         <SearchBar />
         <GeneralWeatherCard />
       </div>
