@@ -47,8 +47,15 @@ const GeneralWeather = () => {
   };
 
   return (
-    <div className="my-6 p-6 rounded-lg lg:h-96 h-fit overflow-hidden" style={styles}>
-      <div className='flex lg:flex-row flex-col justify-center items-center gap-8 h-full'>
+    <div className="my-6 p-6 rounded-lg lg:h-96 h-fit overflow-hidden relative z-10" style={styles}>
+       <div
+        className="absolute inset-0 opacity-20" // Overlay with low opacity background
+        style={{
+          backgroundImage: "url('/images/clouds.jpg')", // Replace with your image URL
+          backgroundSize: 'cover',
+        }}
+      />
+      <div className='flex lg:flex-row flex-col justify-center items-center gap-8 h-full '>
           <div className='lg:w-1/2 w-full h-full flex flex-col justify-between items-center'>
             <div className='flex flex-row justify-between items-center w-full'>
               <div className='flex flex-row justify-start items-center '><TbMapPin className="mr-2 text-2xl" /><span className='font-semibold text-xl'>Gotham</span></div>
