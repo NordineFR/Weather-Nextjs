@@ -14,7 +14,7 @@ const WindDirectionCircle= ({ windDirection }:Props) => {
           <img
             src="/images/pointer_arrow.png"
             alt=""
-            className='max-w-full max-h-full p-3'
+            className='max-w-full max-h-full p-4'
             style={{ transform: `rotate(${defaultwindDirection}deg)` }}
           />
         </div>
