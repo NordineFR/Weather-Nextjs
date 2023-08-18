@@ -21,6 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
+    "react-svg": "^16.1.21",
     "recharts": "^2.7.3",
     "swiper": "^10.2.0",
     "tailwind-merge": "^1.14.0",
