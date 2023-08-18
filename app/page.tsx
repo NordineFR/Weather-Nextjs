@@ -14,7 +14,12 @@ export default function Home() {
       <div className='flex-1 h-full p-6 '>
         <SearchBar />
         <GeneralWeatherCard />
-        <WindCard width="md:w-1/2"/>
+        <div className='grid gap-4 grid-cols-2'>
+          <WindCard windDirection={45} title="Wind"  desc="Today wind speed" value="12km/h" type="wind"/>
+          <WindCard windDirection={45} title="Rain Chanse"  desc="Today rain chanse" value="24%" type="wind"/>
+          <WindCard windDirection={45} title="Pressure"  desc="Today Pressure" value="720 hpa" type="wind"/>
+          <WindCard windDirection={45} title="UV Index"  desc="Today UV Index" value="2" type="wind"/>
+        </div>
       </div>
       <WeatherDetails/>
     </main>
