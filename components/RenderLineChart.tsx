@@ -16,7 +16,7 @@ const RenderLineChart  = ({ color }:Props) => {
     return (
     <ResponsiveContainer width="100%" height={80}>
             <LineChart width={400} height={400} data={data}>
-                    <Line type="monotone" dataKey="pv" stroke={color} activeDot={{ r: 8 }} />
+                    <Line type="monotone" dataKey="pv" stroke={color} strokeWidth={2} activeDot={{ r: 8 }} />
             </LineChart>
     </ResponsiveContainer>
     ) 
