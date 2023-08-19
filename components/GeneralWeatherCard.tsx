@@ -39,7 +39,7 @@ const GeneralWeather = () => {
         color: 'white' // Set the text color for cloudy
       };
     }
-    // Add more conditions for other weather statuses and styles
+    
     return {
       backgroundColor: '',
       color: ''

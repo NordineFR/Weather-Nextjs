@@ -23,7 +23,24 @@ export function Uvarced(props: ArcedProps) {
     baseRadius: 12,
     tipRadius: 7
   });
+  function getUVIndexText(value: number): string {
+    const originalValue = (value / 100) * 11;
 
+    if (originalValue < 3) {
+      return "Low";
+    } else if (originalValue < 6) {
+      return "Moderate";
+    } else if (originalValue < 8) {
+      return "High";
+    } else if (originalValue < 11) {
+      return "Very High";
+    } else if(originalValue > 11){
+      return "Extreme";
+    }else{
+      return "Empty";
+    }
+  }
+  const uvIndexText = getUVIndexText(value);
   return (
     <div className="max-w-full max-h-full">
       <svg className="w-full overflow-visible p-2" {...gauge.getSVGProps()}>
@@ -45,7 +62,7 @@ export function Uvarced(props: ArcedProps) {
             <stop offset="40%" stopColor="#edf872" /> {/* Yellow */}
             <stop offset="60%" stopColor="#ffa150" /> {/* Orange */}
             <stop offset="100%" stopColor="#FF5D42" />
-            </linearGradient>
+            </linearGradient>   
             </defs>
             <path
                 {...gauge.getArcProps({
@@ -62,7 +79,9 @@ export function Uvarced(props: ArcedProps) {
         <g id="needle">
           <circle className="fill-white stroke-[#ecf3f8] shadow-md" strokeWidth={2} {...needle.tip} />
         </g>
-        
+        <text x="0" y="5" textAnchor="middle"  font-size="16" className="font-semibold text-2xl text-black" fill="#333">
+          {uvIndexText}
+        </text>
       </svg>
     </div>
   );
