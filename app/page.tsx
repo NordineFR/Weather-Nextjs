@@ -16,8 +16,8 @@ export default function Home() {
         <GeneralWeatherCard />
         <div className='grid gap-6 md:grid-cols-2 grid-cols-1'>
           <WindCard windDirection={45} title="Wind"  desc="Today wind speed" value="12km/h" type="wind"/>
-          <WindCard windDirection={45} title="Rain Chanse"  desc="Today rain chanse" value="24%" type="wind"/>
-          <WindCard windDirection={45} title="Pressure"  desc="Today Pressure" value="720 hpa" type="wind"/>
+          <WindCard windDirection={45} title="Rain Chanse"  desc="Today rain chanse" value="24%" type="rain"/>
+          <WindCard windDirection={45} title="Pressure"  desc="Today Pressure" value="720 hpa" type="pressure"/>
           <WindCard windDirection={45} title="UV Index"  desc="Today UV Index" value="2" type="wind"/>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import WindDirectionCircle from "./WindDirectionCircle";
+import RainComponent from "./RainComponent";
+import CircleMeter from "./CircleMeter";
 
 interface Props{
     title:string
@@ -19,10 +21,10 @@ const WindCard = ({title,desc,windDirection,value,type}:Props) => {
             <h3 className="font-semibold text-black text-xl ">{value}</h3>
         </div>
         <div>
-        {type === 'wind' && <WindDirectionCircle windDirection={windDirection} />}
-        {/* {type === 'rain' && <RainComponent />}
-        {type === 'snow' && <SnowComponent />}
-        {type === 'sunshine' && <SunshineComponent />} */}
+          {type === 'wind' && <WindDirectionCircle windDirection={windDirection} />}
+          {type === 'rain' && <RainComponent rainChance={value}/>}
+          {type === 'pressure' && <CircleMeter pressure={value} />}
+          {/* {type === 'sunshine' && <SunshineComponent />} */}
         </div>
     </div>
   )
