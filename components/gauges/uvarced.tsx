@@ -77,9 +77,9 @@ export function Uvarced(props: ArcedProps) {
             />
         </g>
         <g id="needle">
-          <circle className="fill-white stroke-[#ecf3f8] shadow-md" strokeWidth={2} {...needle.tip} />
+          <circle className="fill-white stroke-[#ecf3f8] shadow-md" {...needle.tip} />
         </g>
-        <text x="0" y="5" textAnchor="middle"  font-size="16" className="font-semibold text-2xl text-black" fill="#333">
+        <text x="0" y="5" textAnchor="middle" className="font-semibold text-2xl text-black" fill="#333">
           {uvIndexText}
         </text>
       </svg>

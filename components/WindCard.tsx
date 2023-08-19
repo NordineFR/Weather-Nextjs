@@ -4,12 +4,11 @@ import CircleMeter from "./CircleMeter";
 import UVComponent from "./UVComponent";
 
 interface Props{
-    title:string
-    desc:string
-    windDirection?:number
-    value:string
-    type:string
-
+    title:string;
+    desc:string;
+    windDirection?:number;
+    value:string;
+    type:string;
 }
 
 const WindCard = ({title,desc,windDirection,value,type}:Props) => {

@@ -6,10 +6,19 @@ import WeatherDetails from '@/components/WeatherDetails'
 import SearchBar from '@/components/SearchBar'
 import GeneralWeatherCard from '@/components/GeneralWeatherCard' 
 import WindCard from '@/components/WindCard'
+import { useState } from 'react';
+import { useRouter, useSearchParams,usePathname } from 'next/navigation';
 
 
 export default function Home() {
-  const city = "casa"
+  const [city,setCity] = useState("casa");
+  const router = useRouter();
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+ console.log(searchParams.get('city'));
+ console.log(pathname);
+  // const { search } = router.query;
+
   return (
     <main className="flex-1 flex flex-col xl:flex-row bg-gradient-to-br bg-white overflow-y-auto">
       <div className='flex-1 h-full p-6 '>

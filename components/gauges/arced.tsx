@@ -69,13 +69,18 @@ export function Arced(props: ArcedProps) {
           {gauge.ticks.map((angle) => {
             const asValue = gauge.angleToValue(angle);
             const showText = asValue === 20 || asValue === 80 || asValue === 50;
+            const tickProps = gauge.getTickProps({ angle, length: showText ? 12 : 6 });
 
             return (
               <React.Fragment key={`tick-group-${angle}`}>
                 <line
-                  className="stroke-gray-300"
-                  strokeWidth={2}
-                  {...gauge.getTickProps({ angle, length: showText ? 12 : 6 })}
+                   key={tickProps.key} 
+                   className="stroke-gray-300"
+                   strokeWidth={2}
+                   x1={parseFloat(tickProps.x1.toFixed(6))} 
+                    x2={parseFloat(tickProps.x2.toFixed(6))}
+                    y1={parseFloat(tickProps.y1.toFixed(6))}
+                    y2={parseFloat(tickProps.y2.toFixed(6))}
                 />
                 {showText && (
                   <text
