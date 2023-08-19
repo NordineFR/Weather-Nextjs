@@ -1,8 +1,13 @@
 import React from 'react'
-
-const UVComponent = () => {
+import { Uvarced } from './gauges/uvarced'
+interface Props{
+    uvIndex:string
+}
+const UVComponent = ({uvIndex}:Props) => {
+    const floatNumber = parseFloat(uvIndex);
+    const uvIndexnumber =  (floatNumber / 11) * 100;
   return (
-    <div>UVComponent</div>
+    <Uvarced value={uvIndexnumber}/>
   )
 }
 

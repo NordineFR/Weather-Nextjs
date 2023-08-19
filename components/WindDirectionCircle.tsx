@@ -2,11 +2,11 @@ import React from 'react';
 import circle  from 'react-svg';
 
 interface Props {
-  windDirection: number;
+  windDirection: number | undefined;
 }
 
 const WindDirectionCircle= ({ windDirection }:Props) => {
-  const defaultwindDirection = windDirection - 47;
+  const defaultwindDirection = (windDirection ? windDirection : 0) - 47;
   // svg params
     const fillPercentage=1;
     const radius = 45; 

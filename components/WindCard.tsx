@@ -6,7 +6,7 @@ import UVComponent from "./UVComponent";
 interface Props{
     title:string
     desc:string
-    windDirection:number
+    windDirection?:number
     value:string
     type:string
 
@@ -15,7 +15,7 @@ interface Props{
 const WindCard = ({title,desc,windDirection,value,type}:Props) => {
 
   return (
-    <div className={`p-6 grid grid-cols-2 gap-1 bg-[#ecf3f8] w-full `}>
+    <div className={`p-6 grid grid-cols-2 gap-1 rounded-lg bg-[#ecf3f8] w-full `}>
         <div className="flex flex-col justify-between items-start text-left group:w-full">
             <h3 className="font-semibold text-black text-xl ">{title}</h3>
             <h3 className=" text-gray-400 text-md py-4">{desc}</h3>
@@ -25,7 +25,7 @@ const WindCard = ({title,desc,windDirection,value,type}:Props) => {
           {type === 'wind' && <WindDirectionCircle windDirection={windDirection} />}
           {type === 'rain' && <RainComponent rainChance={value}/>}
           {type === 'pressure' && <CircleMeter pressure={value} />}
-          {type === 'uvi' && <UVComponent />}
+          {type === 'uvi' && <UVComponent uvIndex={value} />}
         </div>
     </div>
   )

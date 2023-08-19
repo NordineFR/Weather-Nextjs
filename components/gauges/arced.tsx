@@ -10,6 +10,13 @@ const END_ANGLE = 315;
 
 export function Arced(props: ArcedProps) {
   const { value } = props;
+
+
+  const gradientStop = value / 2000;
+  const gradientX1 = `${(1 - gradientStop) * 100}%`;
+  const gradientX2 = '100%';
+
+
   const gauge = useGauge({
     domain: [0, 2000],
     startAngle: START_ANGLE,
@@ -39,14 +46,21 @@ export function Arced(props: ArcedProps) {
             strokeLinecap="round"
             strokeWidth={16}
           />
+            <defs>
+              <linearGradient id="stroke-gradient1" x1={gradientX1} y1={gradientX1} x2={gradientX2} y2="0%">
+                <stop offset="0%" stopColor="#c4e2ff" />
+                <stop offset="100%" stopColor="#24609b" />
+              </linearGradient>
+            </defs>
             <path
                 {...gauge.getArcProps({
                 offset: 3,
                 startAngle: START_ANGLE,
                 endAngle: gauge.valueToAngle(value)
                 })}
+                stroke="url(#stroke-gradient1)"
+                // className="stroke-[#24609b]"
                 fill="none"
-                className="stroke-blue-300"
                 strokeLinecap="round"
                 strokeWidth={16}
             />
@@ -77,9 +91,9 @@ export function Arced(props: ArcedProps) {
         </g>
         <g id="needle">
           <circle className="fill-gray-300" {...needle.base} r={20} />
-          <circle className="fill-gray-700" {...needle.base} />
-          <circle className="fill-gray-700" {...needle.tip} />
-          <polyline className="fill-gray-700" points={needle.points} />
+          <circle className="fill-[#24609b]" {...needle.base} />
+          <circle className="fill-[#24609b]" {...needle.tip} />
+          <polyline className="fill-[#24609b]" points={needle.points} />
           <circle className="fill-white" {...needle.base} r={4} />
         </g>
       </svg>

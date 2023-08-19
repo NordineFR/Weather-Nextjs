@@ -7,14 +7,12 @@ interface Props{
 }
 
 const CircleMeter = ({pressure}:Props) => {
-    const numericValue = parseFloat(pressure.replace('hpa', ''));
-    const pressureValue = numericValue;
+    const pressureValue = parseFloat(pressure.replace('hpa', ''));
+    const cappedPressureValue = pressureValue > 2000 ? 2000 : pressureValue;
 
 
     return (
-        // <div className="w-[130px] h-[130px] max-w-full max-h-full">
-        // </div>
-        <Arced value={pressureValue} />
+        <Arced value={cappedPressureValue} />
   );
 }
 
