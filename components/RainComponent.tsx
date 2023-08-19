@@ -23,7 +23,7 @@ const RainComponent = ({rainChance}:Props) => {
         label = 'Empty';
     }
     return (
-      <div className="w-full h-full relative border-50">
+      <div className="relative border-50">
       <svg viewBox="0 0 100 100" className="w-[130px] h-[130px] max-h-full max-w-full">
           <circle
            cx="50"

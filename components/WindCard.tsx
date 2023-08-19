@@ -1,6 +1,7 @@
 import WindDirectionCircle from "./WindDirectionCircle";
 import RainComponent from "./RainComponent";
 import CircleMeter from "./CircleMeter";
+import UVComponent from "./UVComponent";
 
 interface Props{
     title:string
@@ -14,17 +15,17 @@ interface Props{
 const WindCard = ({title,desc,windDirection,value,type}:Props) => {
 
   return (
-    <div className={`p-6 flex flex-row  justify-between items-center rounded-lg gap-2 bg-[#ecf3f8] w-full `}>
+    <div className={`p-6 grid grid-cols-2 gap-1 bg-[#ecf3f8] w-full `}>
         <div className="flex flex-col justify-between items-start text-left group:w-full">
             <h3 className="font-semibold text-black text-xl ">{title}</h3>
             <h3 className=" text-gray-400 text-md py-4">{desc}</h3>
             <h3 className="font-semibold text-black text-xl ">{value}</h3>
         </div>
-        <div>
+        <div className="flex flex-col justify-center items-end text-left group:w-full">
           {type === 'wind' && <WindDirectionCircle windDirection={windDirection} />}
           {type === 'rain' && <RainComponent rainChance={value}/>}
           {type === 'pressure' && <CircleMeter pressure={value} />}
-          {/* {type === 'sunshine' && <SunshineComponent />} */}
+          {type === 'uvi' && <UVComponent />}
         </div>
     </div>
   )

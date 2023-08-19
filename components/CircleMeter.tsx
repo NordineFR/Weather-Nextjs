@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Cell } from 'recharts';
+import { Arced } from "./gauges/arced";
 
 interface Props{
     pressure:string
@@ -10,10 +11,10 @@ const CircleMeter = ({pressure}:Props) => {
     const pressureValue = numericValue;
 
 
-  return (
-    <div className="w-[130px] h-[130px] max-w-full max-h-full">
-        
-    </div>
+    return (
+        // <div className="w-[130px] h-[130px] max-w-full max-h-full">
+        // </div>
+        <Arced value={pressureValue} />
   );
 }
 
