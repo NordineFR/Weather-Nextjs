@@ -6,40 +6,110 @@ import WeatherDetails from '@/components/WeatherDetails'
 import SearchBar from '@/components/SearchBar'
 import GeneralWeatherCard from '@/components/GeneralWeatherCard' 
 import WindCard from '@/components/WindCard'
-import { useState } from 'react';
-import { useRouter, useSearchParams,usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
+import { useSearchParams,usePathname } from 'next/navigation';
+import Loading from './loading'
+import ErrorHandler from '../components/error'
 
 export default function Home() {
-  const [city,setCity] = useState("casa");
-  const router = useRouter();
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
- console.log(searchParams.get('city'));
- console.log(pathname);
-  // const { search } = router.query;
+  const [data,setData] = useState({});
+  const searchParams = useSearchParams().get('search');
+  const [location,setLocation] = useState(searchParams || "");
+  const [loading, setLoading] = useState(false);
+  const [error,setError] = useState("");
 
+  
+  // useEffect(() => {
+
+  //   setData({});
+  //   // setLocation(searchParams || "");
+  //   if (location) {
+  //     setLoading(true);
+  //     setError('');
+  //     fetchWeatherData();
+  //   }
+  // }, [])
+
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`;
+  const handleSearch = async (e: { key: string; preventDefault: () => void }) => {
+        if(e.key === "Enter"){
+          e.preventDefault();
+          setLoading(true);
+          try{
+            const response = await fetch(url)
+            if(!response.ok){
+              throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            setData(data);
+            setLocation("");
+            setError("");
+            setLoading(false);
+          }catch(error){
+            setError("City not found");
+            setData({});
+            setLoading(false);
+          }
+        } 
+  }
+  
+  const fetchWeatherData = () => {
+    
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          setData({});
+          throw new Error('Failed to fetch data');
+        }
+        return response.json();
+      })
+      .then((jsonData) => {
+        setData(jsonData);
+        setError('');
+        setLocation('');
+      })
+      .catch(() => {
+        setError('City not found');
+        setData({});
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  console.log(data);
+  
   return (
     <main className="flex-1 flex flex-col xl:flex-row bg-gradient-to-br bg-white overflow-y-auto">
-      <div className='flex-1 h-full p-6 '>
-        <SearchBar />
-        <div className={`${city ? "" : "hidden"}`}>
-            <GeneralWeatherCard />
+    <div className='flex-1 h-full p-6 '>
+      <SearchBar  setLocation={setLocation} handleSearch={handleSearch} setError={setError}/>
+      {loading ? (
+        <Loading />
+      ) : (
+        Object.keys(data).length > 0 ? (
+          <div>
+            <GeneralWeatherCard data={data}/>
             <div className='grid gap-6 md:grid-cols-2 grid-cols-1'>
-              <WindCard windDirection={45} title="Wind"  desc="Today wind speed" value="12km/h" type="wind"/>
-              <WindCard title="Rain Chanse"  desc="Today rain chanse" value="24%" type="rain"/>
-              <WindCard title="Pressure"  desc="Today Pressure" value="720 hpa" type="pressure"/>
-              <WindCard  title="UV Index"  desc="Today UV Index" value="7" type="uvi"/>
+              <WindCard windDirection={45} title='Wind' desc='Today wind speed' value='12km/h' type='wind' />
+              <WindCard title='Rain Chance' desc='Today rain chance' value='24%' type='rain' />
+              <WindCard title='Pressure' desc='Today Pressure' value='720 hpa' type='pressure' />
+              <WindCard title='UV Index' desc='Today UV Index' value='7' type='uvi' />
             </div>
-        </div>
-        <div className={`flex flex-col h-[calc(100%-120px)] justify-center items-center text-center text-black ${city ? "hidden" : ""}`}>
-          <h1 className='font-extrabold md:text-4xl text-2xl'>Welcome to the weathe app ⛅</h1> 
-          <p className='p-2 md:text-xl text-sm font-semibold'>Enter a city name to get the weather forecast</p> 
-        </div>
-      </div>
-      <div className={`${city ? "" : "hidden"}`}>
-        <WeatherDetails/>
-      </div>
-    </main>
+          </div>
+        ) : (error ? (
+          <ErrorHandler message={error} />
+        ) : (
+          <div className={`flex flex-col h-[calc(100%-120px)] justify-center items-center text-center text-black`}>
+            <h1 className='font-extrabold md:text-4xl text-2xl'>Welcome to the weather app ⛅</h1> 
+            <p className='p-2 md:text-xl text-sm font-semibold'>Enter a city name to get the weather forecast</p> 
+          </div>
+        ))
+      )}
+    </div>
+    {Object.keys(data).length > 0 && (
+      <WeatherDetails/>
+    )}
+  </main>
   )
 }
