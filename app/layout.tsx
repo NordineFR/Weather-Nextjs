@@ -2,6 +2,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import SideBar from '@/components/SideBar'
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,8 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className='flex flex-row min-h-screen'>
           <SideBar />
-
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </div>
         </body>
     </html>
