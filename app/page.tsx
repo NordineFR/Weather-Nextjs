@@ -43,7 +43,7 @@ export default function Home() {
             }
             const data = await response.json();
             setData(data);
-            setLocation("");
+            // setLocation("");
             setError("");
             setLoading(false);
           }catch(error){
@@ -79,6 +79,7 @@ export default function Home() {
   };
 
   console.log(data);
+  console.log(location);
   
   return (
     <main className="flex-1 flex flex-col xl:flex-row bg-gradient-to-br bg-white overflow-y-auto">
@@ -91,10 +92,10 @@ export default function Home() {
           <div>
             <GeneralWeatherCard data={data}/>
             <div className='grid gap-6 md:grid-cols-2 grid-cols-1'>
-              <WindCard windDirection={45} title='Wind' desc='Today wind speed' value='12km/h' type='wind' />
-              <WindCard title='Rain Chance' desc='Today rain chance' value='24%' type='rain' />
-              <WindCard title='Pressure' desc='Today Pressure' value='720 hpa' type='pressure' />
-              <WindCard title='UV Index' desc='Today UV Index' value='7' type='uvi' />
+              <WindCard windDirection={data?.current?.wind_degree} title='Wind' desc='Today wind speed' value={`${data?.current?.wind_kph}km/h`} type='wind' />
+              <WindCard title='Rain Chance' desc='Today rain chance' value={`${data?.forecast?.forecastday[0]?.day.daily_chance_of_rain}%`} type='rain' />
+              <WindCard title='Pressure' desc='Today Pressure' value={`${data?.current?.pressure_mb} hpa`} type='pressure' />
+              <WindCard title='UV Index' desc='Today UV Index' value={data?.current?.uv} type='uvi' />
             </div>
           </div>
         ) : (error ? (

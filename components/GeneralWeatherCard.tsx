@@ -23,7 +23,7 @@ interface Props<T> {
     color: ''
   });
 
-  const weatherStatus = 'sunny';
+  const weatherStatus = data?.current?.condition?.text.toLowerCase();
 
   useEffect(() => {
     const fetchWeatherStyles = async () => {
@@ -44,37 +44,20 @@ interface Props<T> {
     // Simulate fetching styles asynchronously (replace with actual API call)
     return new Promise<Styles>((resolve) => {
       setTimeout(() => {
-        switch (weatherStatus) {
-          case 'sunny':
-            resolve({
-              backgroundColor: '#c4e2ff',
-              color: '#24609b',
-            });
-            break;
-          case 'cloudy':
-            resolve({
-              backgroundColor: '#0F1621',
-              color: 'white',
-            });
-            break;
-          case 'windy':
-            resolve({
-              backgroundColor: '#0F1621',
-              color: 'white',
-            });
-            break;
-          case 'rainy':
-            resolve({
-              backgroundColor: '#0F1621',
-              color: 'white',
-            });
-            break;
-          case 'stormy':
-            resolve({
-              backgroundColor: '#0F1621',
-              color: 'white',
-            });
-            break;
+        let backgroundColor = '';
+        let color = '';
+        switch (true) {
+          case /sunny|clear/.test(weatherStatus):
+            backgroundColor = '#c4e2ff';
+            color = '#24609b';
+          break;
+          case /cloudy/.test(weatherStatus):
+          case /windy/.test(weatherStatus):
+          case /rainy/.test(weatherStatus):
+          case /stormy/.test(weatherStatus):
+            backgroundColor = '#0F1621';
+            color = 'white';
+          break;
           default:
             resolve({
               backgroundColor: '',
@@ -82,11 +65,15 @@ interface Props<T> {
             });
             break;
         }
+        resolve({
+          backgroundColor,
+          color,
+        });
       }, 1000); 
     });
   };
   if (loading) {
-    return <Loading className="my-6 p-6 rounded-lg lg:h-96 h-fit " />;
+    return <Loading className="my-6 p-6 rounded-lg h-96 " />;
   }
 
   const formattedTime = data?.location?.localtime ? new Date(data.location.localtime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) : '';

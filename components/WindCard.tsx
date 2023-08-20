@@ -2,6 +2,9 @@ import WindDirectionCircle from "./WindDirectionCircle";
 import RainComponent from "./RainComponent";
 import CircleMeter from "./CircleMeter";
 import UVComponent from "./UVComponent";
+import { useEffect, useState } from "react";
+import Loading from "@/app/loading";
+
 
 interface Props{
     title:string;
@@ -12,7 +15,15 @@ interface Props{
 }
 
 const WindCard = ({title,desc,windDirection,value,type}:Props) => {
-
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+        setLoading(false);
+    },1000);
+  }, []);
+  if (loading) {
+    return <Loading className="p-6 grid grid-cols-2 gap-1 rounded-lg h-44 w-full" />;
+  }
   return (
     <div className={`p-6 grid grid-cols-2 gap-1 rounded-lg bg-[#ecf3f8] w-full `}>
         <div className="flex flex-col justify-between items-start text-left group:w-full">
