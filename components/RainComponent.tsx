@@ -13,7 +13,9 @@ const RainComponent = ({rainChance}:Props) => {
     const dashOffset = circumference - (fillPercentage * circumference) / 100;
 
     let label = '';
-    if (fillPercentage <= 33) {
+    if (fillPercentage <= 10) {
+      label = 'very low';
+    } else if (fillPercentage <= 33) {
       label = 'low';
     } else if (fillPercentage <= 66) {
       label = 'medium';

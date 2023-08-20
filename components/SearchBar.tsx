@@ -22,7 +22,7 @@ const SearchBar = ({setLocation,handleSearch,setError}:Props) => {
     }
 
   return (
-    <form onSubmit={()=>{}} autoComplete='off' className=' text-gray-300 focus-within:text-gray-600'>
+    <form autoComplete='off' className=' text-gray-300 focus-within:text-gray-600'>
         <label htmlFor="search-field" className='sr-only'>Search City Weather </label>
         <div className='flex flex-row justify-start items-center'>
             <FiSearch className="w-5 h-5 text-black" />
