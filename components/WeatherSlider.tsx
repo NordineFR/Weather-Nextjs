@@ -18,7 +18,7 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
     if(loading){
       return <Loading className="my-2 rounded-lg h-28 w-full" />
     }
-    
+    console.log(data);
   return (
     <Swiper 
                 slidesPerView={4}
@@ -34,7 +34,7 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
                       (data?.forecast?.forecastday[0]?.hour).map((hourdata: { time: string | number | Date; condition: {
                         text: string | undefined; icon: string | undefined; 
 }; temp_c: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; },i: React.Key | null | undefined)=>{
-                        const currentHourIndex = new Date().getHours();
+                        const currentHourIndex = new Date(data?.location?.localtime).getHours();
                         const hoursArray = data?.forecast?.forecastday[0]?.hour || [];
                         const hourIndex = hoursArray.indexOf(hourdata);
 
@@ -46,7 +46,7 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
                       >
                           <div className={`text-center rounded-lg p-2 w-[85px] ${hourIndex === currentHourIndex ? 'bg-[#c4e2ff] [&>img]:invert [&>img]:brightness-0' : ''}`}>
                             <h5 className='text-sm font-medium capitalize mb-1'>{hourIndex === currentHourIndex ? 'Now' : new Date(hourdata.time).toLocaleTimeString('en-US', { hour: '2-digit', hour12: true })}</h5>
-                            <img src={hourdata.condition.icon} className="text-center w-full h-[50px] object-cover" alt={hourdata.condition.text} />
+                            <img src={hourdata.condition.icon} className="text-center w-[50px] h-[50px] object-cover mx-auto" alt={hourdata.condition.text} />
                             <h4 className='font-semibold text-black text-md mt-1'>{hourdata.temp_c}°</h4>
                           </div>
                       </SwiperSlide>)
