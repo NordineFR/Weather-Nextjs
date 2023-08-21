@@ -11,6 +11,7 @@ import 'swiper/css/free-mode';
 type Styles = {
   backgroundColor: string;
   color: string;
+  backgroundImage:string
 };
 interface Props<T> {
   data: T;
@@ -20,7 +21,8 @@ interface Props<T> {
   const [loading, setLoading] = useState(true);
   const [styles, setStyles] = useState<Styles>({
     backgroundColor: '',
-    color: ''
+    color: '',
+    backgroundImage:''
   });
 
   const weatherStatus = data?.current?.condition?.code;
@@ -32,7 +34,8 @@ interface Props<T> {
         const weatherStyles = await getWeatherStyles(weatherStatus,localHour);
         const colorStyle = {
           backgroundColor: weatherStyles.backgroundColor,
-          color: weatherStyles.color
+          color: weatherStyles.color,
+          backgroundImage: weatherStyles.backgroundImage,
         };
         setStyles(colorStyle);
         setLoading(false);
@@ -51,23 +54,29 @@ interface Props<T> {
       setTimeout(() => {
         let backgroundColor = '';
         let color = '';
+        let backgroundImage = '';
+
         if(localHour >= 21 || localHour < 6){
           backgroundColor = '#0F1621';
           color = 'white';
+          backgroundImage = "url('/images/clouds.jpg')";
         }else{
           switch (weatherStatus.toString()) {
             case '1000': // Sunny
               backgroundColor = '#c4e2ff';
               color = '#24609b';
+              backgroundImage = "url('/images/clouds.jpg')";
               break;
             case '1003': // Partly cloudy
               backgroundColor = '#c4e2ff';
               color = '#24609b';
+              backgroundImage = "url('/images/clouds.jpg')";
               break;
             case '1006': // Cloudy
             case '1009': // Overcast
               backgroundColor = '#0F1621';
               color = 'white';
+              backgroundImage = "url('/images/clouds.jpg')";
               break;
             case '1063': // Patchy rain possible
             case '1066': // Patchy snow possible
@@ -89,6 +98,7 @@ interface Props<T> {
             default:
               backgroundColor = '';
               color = '';
+              backgroundImage = '';
               break;
           }
         }
@@ -96,6 +106,7 @@ interface Props<T> {
         resolve({
           backgroundColor,
           color,
+          backgroundImage,
         });
       }, 1000); 
     });
@@ -127,12 +138,10 @@ interface Props<T> {
   }
   // end of timeslot  
   return (
-    <div className="my-6 p-6 rounded-lg lg:h-96 h-fit overflow-hidden relative z-10" style={styles}>
+    <div className="my-6 p-6 rounded-lg lg:h-96 h-fit overflow-hidden relative z-10" style={{backgroundColor: styles.backgroundColor,color: styles.color}}>
        <div
         className="absolute inset-0 opacity-20 bg-cover"
-        style={{
-          backgroundImage: "url('/images/clouds.jpg')", 
-        }}
+        style={{backgroundImage: styles.backgroundImage,}}
       />
       <div className='flex lg:flex-row flex-col justify-center items-center gap-8 h-full '>
           <div className='lg:w-1/2 w-full h-full flex flex-col justify-between items-center'>
