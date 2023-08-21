@@ -31,7 +31,7 @@ export default function Home() {
   //   }
   // }, [])
 
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`;
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=8&aqi=yes&alerts=yes`;
   const handleSearch = async (e: { key: string; preventDefault: () => void }) => {
         if(e.key === "Enter"){
           e.preventDefault();
@@ -77,9 +77,6 @@ export default function Home() {
         setLoading(false);
       });
   };
-
-  console.log(data);
-  console.log(location);
   
   return (
     <main className="flex-1 flex flex-col xl:flex-row bg-gradient-to-br bg-white overflow-y-auto">
