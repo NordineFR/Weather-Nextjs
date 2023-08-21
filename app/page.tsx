@@ -109,7 +109,7 @@ export default function Home() {
       )}
     </div>
     {Object.keys(data).length > 0 && (
-      <WeatherDetails/>
+      <WeatherDetails data={data} />
     )}
   </main>
   )
