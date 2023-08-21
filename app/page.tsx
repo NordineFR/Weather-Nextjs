@@ -54,29 +54,29 @@ export default function Home() {
         } 
   }
   
-  const fetchWeatherData = () => {
+  // const fetchWeatherData = () => {
     
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          setData({});
-          throw new Error('Failed to fetch data');
-        }
-        return response.json();
-      })
-      .then((jsonData) => {
-        setData(jsonData);
-        setError('');
-        setLocation('');
-      })
-      .catch(() => {
-        setError('City not found');
-        setData({});
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  //   fetch(url)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         setData({});
+  //         throw new Error('Failed to fetch data');
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((jsonData) => {
+  //       setData(jsonData);
+  //       setError('');
+  //       setLocation('');
+  //     })
+  //     .catch(() => {
+  //       setError('City not found');
+  //       setData({});
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // };
   
   return (
     <main className="flex-1 flex flex-col xl:flex-row bg-gradient-to-br bg-white overflow-y-auto">

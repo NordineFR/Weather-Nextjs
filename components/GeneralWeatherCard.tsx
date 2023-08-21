@@ -23,13 +23,18 @@ interface Props<T> {
     color: ''
   });
 
-  const weatherStatus = data?.current?.condition?.text.toLowerCase();
+  const weatherStatus = data?.current?.condition?.code;
+  const localHour  = new Date(data?.location?.localtime).getHours();;
 
   useEffect(() => {
     const fetchWeatherStyles = async () => {
       try {
-        const weatherStyles = await getWeatherStyles(weatherStatus);
-        setStyles(weatherStyles);
+        const weatherStyles = await getWeatherStyles(weatherStatus,localHour);
+        const colorStyle = {
+          backgroundColor: weatherStyles.backgroundColor,
+          color: weatherStyles.color
+        };
+        setStyles(colorStyle);
         setLoading(false);
       } catch (error) {
         // Handle error
@@ -40,31 +45,54 @@ interface Props<T> {
     fetchWeatherStyles();
   }, []);
 
-  const getWeatherStyles = async (weatherStatus: string): Promise<Styles> => {
+  const getWeatherStyles = async (weatherStatus: string,localHour:number): Promise<Styles> => {
     // Simulate fetching styles asynchronously (replace with actual API call)
     return new Promise<Styles>((resolve) => {
       setTimeout(() => {
         let backgroundColor = '';
         let color = '';
-        switch (true) {
-          case /sunny|clear/.test(weatherStatus):
-            backgroundColor = '#c4e2ff';
-            color = '#24609b';
-          break;
-          case /cloudy/.test(weatherStatus):
-          case /windy/.test(weatherStatus):
-          case /rainy/.test(weatherStatus):
-          case /stormy/.test(weatherStatus):
-            backgroundColor = '#0F1621';
-            color = 'white';
-          break;
-          default:
-            resolve({
-              backgroundColor: '',
-              color: '',
-            });
-            break;
+        if(localHour >= 21 || localHour < 6){
+          backgroundColor = '#0F1621';
+          color = 'white';
+        }else{
+          switch (weatherStatus.toString()) {
+            case '1000': // Sunny
+              backgroundColor = '#c4e2ff';
+              color = '#24609b';
+              break;
+            case '1003': // Partly cloudy
+              backgroundColor = '#c4e2ff';
+              color = '#24609b';
+              break;
+            case '1006': // Cloudy
+            case '1009': // Overcast
+              backgroundColor = '#0F1621';
+              color = 'white';
+              break;
+            case '1063': // Patchy rain possible
+            case '1066': // Patchy snow possible
+            case '1069': // Patchy sleet possible
+            case '1072': // Patchy freezing drizzle possible
+              backgroundColor = '#0F1621';
+              color = 'white';
+              break;
+            case '1087': // Thundery outbreaks possible
+              backgroundColor = '#0F1621';
+              color = 'white';
+              break;
+            case '1114': // Blowing snow
+            case '1117': // Blizzard
+              backgroundColor = '#0F1621';
+              color = 'white';
+              break;
+            // Add more cases for other weather conditions and their corresponding colors
+            default:
+              backgroundColor = '';
+              color = '';
+              break;
+          }
         }
+
         resolve({
           backgroundColor,
           color,
@@ -97,14 +125,13 @@ interface Props<T> {
       temperature: matchingHourData ? matchingHourData.temp_c : null,
     });
   }
-  // end of timeslot
+  // end of timeslot  
   return (
     <div className="my-6 p-6 rounded-lg lg:h-96 h-fit overflow-hidden relative z-10" style={styles}>
        <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-20 bg-cover"
         style={{
           backgroundImage: "url('/images/clouds.jpg')", 
-          backgroundSize: 'cover',
         }}
       />
       <div className='flex lg:flex-row flex-col justify-center items-center gap-8 h-full '>
