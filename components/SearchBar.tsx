@@ -1,6 +1,7 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { FiSearch } from "react-icons/fi";
 import { useRouter } from 'next/navigation';
+import Loading from '@/app/loading';
 interface Props{
   handleSearch:(event: React.KeyboardEvent<HTMLInputElement>) =>void
   setLocation:React.Dispatch<React.SetStateAction<string>>
@@ -9,6 +10,13 @@ interface Props{
 const SearchBar = ({setLocation,handleSearch,setError}:Props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+      setTimeout(() => {
+          setLoading(false);
+      },1000);
+    }, []);
 
     const handleSubmit = (e: { preventDefault: () => void; })=>{
         e.preventDefault();
@@ -30,7 +38,7 @@ const SearchBar = ({setLocation,handleSearch,setError}:Props) => {
             placeholder='Search City Weather'
             onChange={handlebutton}
             onKeyDown={handleSearch}
-            className='flex-1 bg-transparent border-none outline-none placeholder-gray-500 text-base text-black p-4' />
+            className='flex-1 bg-transparent border-none outline-none placeholder-gray-500 text-base text-black p-4' disabled={loading}/>
         </div>
     </form>
   )
