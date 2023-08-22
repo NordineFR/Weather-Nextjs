@@ -96,9 +96,9 @@ interface Props<T> {
               break;
             // Add more cases for other weather conditions and their corresponding colors
             default:
-              backgroundColor = '';
-              color = '';
-              backgroundImage = '';
+              backgroundColor = '#c4e2ff';
+              color = '#24609b';
+              backgroundImage = "url('/images/clouds.jpg')";
               break;
           }
         }
