@@ -66,7 +66,7 @@ interface Props<T> {
             case 1000: // Sunny
               backgroundColor = isNight ? '#0F1621' : '#ffd89e';
               color = isNight ? 'white' : '#000000';
-              backgroundImage = "url('/images/sunny.jpg')";
+              backgroundImage = isNight ? "url('/images/clouds.jpg')" : "url('/images/sunny.jpg')";
               break;
             case 1003: // Partly cloudy
               backgroundColor = isNight ? '#0F1621' : '#c4e2ff';
