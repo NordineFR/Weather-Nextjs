@@ -64,6 +64,10 @@ interface Props<T> {
         }
           switch (weatherStatus) {
             case 1000: // Sunny
+              backgroundColor = isNight ? '#0F1621' : '#ffd89e';
+              color = isNight ? 'white' : '#000000';
+              backgroundImage = "url('/images/sunny.jpg')";
+              break;
             case 1003: // Partly cloudy
               backgroundColor = isNight ? '#0F1621' : '#c4e2ff';
               color = isNight ? 'white' : '#24609b';
@@ -71,7 +75,13 @@ interface Props<T> {
               break;
             case 1006: // Cloudy
             case 1009: // Overcast
+              backgroundColor = isNight ? '#0F1621' : '#c4e2ff';
+              color = isNight ? 'white' : '#24609b';
+              backgroundImage = "url('/images/clouds.jpg')";
             case 1030: // Mist
+              backgroundColor = isNight ? '#0F1621' : '#c4e2ff';
+              color = isNight ? 'white' : '#24609b';
+              backgroundImage = "url('/images/mist.jpg')";
             case 1063: // Patchy rain possible
             case 1066: // Patchy snow possible
             case 1069: // Patchy sleet possible
@@ -85,8 +95,8 @@ interface Props<T> {
             case 1153: // Light drizzle
             case 1168: // Freezing drizzle
             case 1171: // Heavy freezing drizzle
-              backgroundColor = isNight ? '#0F1621' : '#c4e2ff';
-              color = isNight ? 'white' : '#24609b';
+              backgroundColor = isNight ? '#0F1621' : '#ADB8CB';
+              color = 'white';
               break;
             case 1180: // Patchy light rain
             case 1183: // Light rain
