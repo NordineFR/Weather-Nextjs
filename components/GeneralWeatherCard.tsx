@@ -65,7 +65,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           color = "white";
           backgroundImage = "url('/images/clouds.jpg')";
         }
-        weatherStatus = 1009;
+        // weatherStatus = 1009;
         switch (weatherStatus) {
           case 1000: // Sunny
             backgroundColor = isNight ? "#0F1621" : "#ffd89e";
