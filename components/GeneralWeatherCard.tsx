@@ -65,7 +65,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           color = "white";
           backgroundImage = "url('/images/clouds.jpg')";
         }
-        // weatherStatus = 1009;
+        weatherStatus = 1114;
         switch (weatherStatus) {
           case 1000: // Sunny
             backgroundColor = isNight ? "#0F1621" : "#ffd89e";
@@ -85,12 +85,14 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             color = isNight ? "white" : "#24609b";
             backgroundImage = "url('/images/overcast.jpg')";
             break;
+          case 1135: // Fog
+          case 1147: // Freezing fog
           case 1030: // Mist
             backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
             color = "white";
             backgroundImage = "url('/images/mist.jpg')";
             break;
-          case 1063: // Patchy rain possible
+            case 1063: // Patchy rain possible
             backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
             color = isNight ? "white" : "#24609b";
             backgroundImage = "url('/images/overcast.jpg')";
@@ -98,16 +100,18 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           case 1069: // Patchy sleet possible
           case 1072: // Patchy freezing drizzle possible
           case 1087: // Thundery outbreaks possible
+            backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
+            color = "white";
+            break;
           case 1114: // Blowing snow
           case 1117: // Blizzard
-          case 1135: // Fog
-          case 1147: // Freezing fog
           case 1150: // Patchy light drizzle
           case 1153: // Light drizzle
           case 1168: // Freezing drizzle
           case 1171: // Heavy freezing drizzle
             backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
             color = "white";
+            backgroundImage = "url('/images/snow.jpg')";
             break;
           case 1180: // Patchy light rain
           case 1183: // Light rain
@@ -200,7 +204,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
       style={{ backgroundColor: styles.backgroundColor, color: styles.color }}
     >
       <div
-        className="absolute inset-0 opacity-20 bg-cover"
+        className="absolute inset-0 opacity-100 bg-cover mix-blend-soft-light"
         style={{ backgroundImage: styles.backgroundImage }}
       />
       <div className="flex lg:flex-row flex-col justify-center items-center gap-8 h-full ">
