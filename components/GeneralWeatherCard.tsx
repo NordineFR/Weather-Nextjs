@@ -65,7 +65,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           color = "white";
           backgroundImage = "url('/images/clouds.jpg')";
         }
-        weatherStatus = 1114;
+        // weatherStatus = 1180;
         switch (weatherStatus) {
           case 1000: // Sunny
             backgroundColor = isNight ? "#0F1621" : "#ffd89e";
@@ -92,10 +92,11 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             color = "white";
             backgroundImage = "url('/images/mist.jpg')";
             break;
-            case 1063: // Patchy rain possible
-            backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-            color = isNight ? "white" : "#24609b";
-            backgroundImage = "url('/images/overcast.jpg')";
+          // backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
+          // color = isNight ? "white" : "#24609b";
+          // backgroundImage = "url('/images/overcast.jpg')";
+          // break;
+          case 1063: // Patchy rain possible
           case 1066: // Patchy snow possible
           case 1069: // Patchy sleet possible
           case 1072: // Patchy freezing drizzle possible
@@ -120,7 +121,8 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           case 1192: // Heavy rain at times
           case 1195: // Heavy rain
             backgroundColor = isNight ? "#0F1621" : "#1e3046";
-            color = isNight ? "white" : "#24609b";
+            color = isNight ? "white" : "white";
+            backgroundImage = "url('/images/rain.jpg')";
             break;
           case 1198: // Light freezing rain
           case 1201: // Moderate or heavy freezing rain
