@@ -65,25 +65,19 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           color = "white";
           backgroundImage = "url('/images/clouds.jpg')";
         }
-        // weatherStatus = 1180;
+        weatherStatus = 1000;
         switch (weatherStatus) {
           case 1000: // Sunny
             backgroundColor = isNight ? "#0F1621" : "#ffd89e";
             color = isNight ? "white" : "#000000";
-            backgroundImage = isNight
-              ? "url('/images/clouds.jpg')"
-              : "url('/images/sunny.jpg')";
+            backgroundImage = isNight ? "url('/images/clouds.jpg')" : "url('/images/sunny.jpg')";
             break;
           case 1003: // Partly cloudy
-            backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-            color = isNight ? "white" : "#24609b";
-            backgroundImage = "url('/images/clouds.jpg')";
-            break;
           case 1006: // Cloudy
           case 1009: // Overcast
             backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
             color = isNight ? "white" : "#24609b";
-            backgroundImage = "url('/images/overcast.jpg')";
+            backgroundImage = "url('/images/clouds.jpg')";
             break;
           case 1135: // Fog
           case 1147: // Freezing fog
@@ -92,38 +86,15 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             color = "white";
             backgroundImage = "url('/images/mist.jpg')";
             break;
-          // backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-          // color = isNight ? "white" : "#24609b";
-          // backgroundImage = "url('/images/overcast.jpg')";
-          // break;
-          case 1063: // Patchy rain possible
           case 1066: // Patchy snow possible
           case 1069: // Patchy sleet possible
           case 1072: // Patchy freezing drizzle possible
-          case 1087: // Thundery outbreaks possible
-            backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
-            color = "white";
-            break;
           case 1114: // Blowing snow
           case 1117: // Blizzard
           case 1150: // Patchy light drizzle
           case 1153: // Light drizzle
           case 1168: // Freezing drizzle
           case 1171: // Heavy freezing drizzle
-            backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
-            color = "white";
-            backgroundImage = "url('/images/snow.jpg')";
-            break;
-          case 1180: // Patchy light rain
-          case 1183: // Light rain
-          case 1186: // Moderate rain at times
-          case 1189: // Moderate rain
-          case 1192: // Heavy rain at times
-          case 1195: // Heavy rain
-            backgroundColor = isNight ? "#0F1621" : "#1e3046";
-            color = isNight ? "white" : "white";
-            backgroundImage = "url('/images/rain.jpg')";
-            break;
           case 1198: // Light freezing rain
           case 1201: // Moderate or heavy freezing rain
           case 1204: // Light sleet
@@ -135,6 +106,17 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           case 1222: // Patchy heavy snow
           case 1225: // Heavy snow
           case 1237: // Ice pellets
+            backgroundColor = isNight ? "#ADB8CB70" : "#ADB8CB";
+            color = "white";
+            backgroundImage = "url('/images/snow.jpg')";
+            break;
+          case 1063: // Patchy rain possible
+          case 1180: // Patchy light rain
+          case 1183: // Light rain
+          case 1186: // Moderate rain at times
+          case 1189: // Moderate rain
+          case 1192: // Heavy rain at times
+          case 1195: // Heavy rain
           case 1240: // Light rain shower
           case 1243: // Moderate or heavy rain shower
           case 1246: // Torrential rain shower
@@ -144,12 +126,20 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           case 1258: // Moderate or heavy snow showers
           case 1261: // Light showers of ice pellets
           case 1264: // Moderate or heavy showers of ice pellets
+          case 1087: // Thundery outbreaks possible
           case 1273: // Patchy light rain with thunder
           case 1276: // Moderate or heavy rain with thunder
           case 1279: // Patchy light snow with thunder
           case 1282: // Moderate or heavy snow with thunder
-            backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-            color = isNight ? "white" : "#24609b";
+            backgroundColor =  "#1e3046";
+            color = "white";
+            backgroundImage = "url('/images/rain.jpg')";
+            break;
+          case 1285: // Patchy light snow with thunder
+          case 1288: // Moderate or heavy snow with thunder
+            backgroundColor = "#a594f9b3";
+            color = "white";
+            backgroundImage = "url('/images/thunder.jpg')";
             break;
           default:
             backgroundColor = "#c4e2ff";
@@ -157,9 +147,10 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             backgroundImage = "url('/images/clouds.jpg')";
             break;
         }
+        
 
-        resolve({
-          backgroundColor,
+            resolve({
+              backgroundColor,
           color,
           backgroundImage,
         });
@@ -247,7 +238,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           </div>
         </div>
 
-        <div className="bg-white lg:w-1/2 w-full h-full p-6 rounded-lg backdrop-opacity-60 bg-opacity-40 flex flex-col justify-between items-center">
+        <div className="bg-white lg:w-1/2 w-full h-full p-6 rounded-lg backdrop-opacity-60 bg-opacity-40 flex flex-col justify-between items-center shadow-md">
           <h3 className="mb-4 w-full text-xl font-semibold">Temperature</h3>
           <div className="py-6  w-full">
             <RenderLineChart color={styles.color} data={categorizedData} />
