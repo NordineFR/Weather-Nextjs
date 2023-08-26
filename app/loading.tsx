@@ -5,8 +5,19 @@ interface Props{
 }
 const loading = ({className}:Props) => {
   return (
-    <div className={`animate-pulse bg-gray-200 rounded flex flex-col justify-center items-center ${className}`}>Loading...</div>
-
+    <>
+      {
+        className ? (
+          <div className={`animate-pulse bg-gray-200 rounded flex flex-col justify-center items-center w-full ${className}`}>
+            Loading...
+          </div>
+        ) : (
+          <div className={`animate-pulse rounded flex flex-col justify-center items-center w-full`}>
+            Loading...
+          </div>
+        )
+      }
+    </>
   )
 }
 
