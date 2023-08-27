@@ -26,24 +26,22 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
     let isNight = false;
     if (localHour >= 21 || localHour < 6) {
       isNight = true;
-      backgroundColor = "#0F1621";
-      color = "white";
     }
     switch (weatherStatus) {
       case 1000: // Sunny
-        backgroundColor = isNight ? "bg-[#0F1621]" : "bg-[#ffd89e]";
+        backgroundColor = isNight ? "bg-[#233b52]" : "bg-[#ffd89e]";
         color = isNight ? "text-white" : "text-black";
         break;
       case 1003: // Partly cloudy
       case 1006: // Cloudy
       case 1009: // Overcast
-        backgroundColor = isNight ? "bg-[#0F1621]" : "bg-[#c4e2ff]";
+        backgroundColor = isNight ? "bg-[#233b52]" : "bg-[#c4e2ff]";
         color = isNight ? "text-white" : "text-[#24609b]";
         break;
       case 1135: // Fog
       case 1147: // Freezing fog
       case 1030: // Mist
-        backgroundColor = isNight ? "bg-[#0F1621]" : "bg-[#ADB8CB]";
+        backgroundColor = isNight ? "bg-[#233b52]" : "bg-[#ADB8CB]";
         color = "text-white";
         break;
       case 1066: // Patchy snow possible
@@ -99,8 +97,8 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
         color = "text-white";
         break;
       default:
-        backgroundColor = "bg-[#c4e2ff]";
-        color = "text-[#24609b]";
+        backgroundColor = isNight ? "bg-[#233b52]" : "bg-[#c4e2ff]";
+        color = isNight ? "text-white" : "text-[#24609b]";
         break;
     }
     
