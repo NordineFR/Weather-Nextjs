@@ -201,36 +201,36 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
       />
       <div className="flex lg:flex-row flex-col justify-center items-center gap-8 h-full ">
         <div className="lg:w-1/2 w-full h-full flex flex-col justify-between items-center">
-          <div className="flex flex-row justify-between items-center w-full">
-            <div className="flex flex-row justify-start items-center ">
+          <div className="flex flex-row justify-between items-center w-full gap-2">
+            <div className="flex flex-row justify-start items-center max-w-[60%]">
               <TbMapPin className="mr-2 text-2xl" />
-              <span className="font-semibold text-xl">
+              <span className="font-semibold text-xl truncate">
                 {data?.location?.name}
               </span>
             </div>
-            <div>Today {formattedTime}</div>
+            <div className=" truncate max-w-[40%]">Today {formattedTime}</div>
           </div>
           <div className="flex flex-col justify-center text-center my-8">
             <div className="flex flex-row justify-center items-center mr-[-20px]">
-              <h1 className="text-9xl text-bold">{data?.current?.temp_c}</h1>
-              <span className="h-full text-[80px] mt-[-60px]">°</span>
+              <h1 className="md:text-9xl text-7xl text-bold">{data?.current?.temp_c}</h1>
+              <span className="h-full md:text-[80px] md:mt-[-60px] text-[40px] mt-[-20px]">°</span>
             </div>
             <h4 className="capitalize font-medium">
               {data?.current?.condition?.text}
             </h4>
           </div>
-          <div className="flex flex-row justify-between items-center  w-full">
-            <div className="flex flex-row justify-start items-center">
+          <div className="flex flex-row  justify-between items-center  w-full gap-2">
+            <div className="flex flex-row justify-start items-center max-w-[50%] truncate">
               <TbWind className="mr-2 text-xl" />
-              <span className="font-medium">
+              <span className="font-medium ">
                 {data?.current?.pressure_mb}hpa
               </span>
             </div>
-            <div className="flex flex-row justify-start items-center">
+            <div className="flex flex-row justify-start items-center max-w-[50%] truncate">
               <PiDropBold className="mr-2 text-xl" />
               <span className="font-medium">{data?.current?.humidity}%</span>
             </div>
-            <div className="flex flex-row justify-start items-center">
+            <div className="flex flex-row justify-start items-center max-w-[50%] truncate">
               <TbMapPin className="mr-2 text-xl" />
               <span className="font-medium">{data?.current?.wind_kph}km/h</span>
             </div>
@@ -258,10 +258,10 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
                   style={{ width: "25%", height: "auto" }}
                 >
                   <div className="text-center">
-                    <h5 className="text-sm capitalize">
+                    <h5 className="text-sm capitalize truncate">
                       {timeSlotData.timeSlot}
                     </h5>
-                    <h4 className="font-semibold py-2">
+                    <h4 className="font-semibold py-2 md:text-base text-sm">
                       {timeSlotData.temperature}°
                     </h4>
                   </div>
