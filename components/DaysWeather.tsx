@@ -26,12 +26,12 @@ const DaysWeather = ({data}:Props<Record<string, any>>) => {
   }
   return (
     <div className='grid grid-cols-3 py-2  px-2 my-2 w-full rounded-lg'>
-        <div className='flex flex-col justify-between items-start gap-1 '>
-            <h3 className='text-black font-medium text-[18px] capitalize'>{isTomorrow(data?.date) ? 'Tomorrow' : new Date(data?.date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
-            <p className='text-gray-400 text-md'>{new Date(data?.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).split(' ').reverse().join(' ')}</p>
+        <div className='flex flex-col justify-center items-start gap-1 '>
+            <h3 className='text-black font-medium md:text-[18px] text-sm capitalize'>{isTomorrow(data?.date) ? 'Tomorrow' : new Date(data?.date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
+            <p className='text-gray-400 md:text-md text-sm'>{new Date(data?.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).split(' ').reverse().join(' ')}</p>
         </div>
-        <div className='flex justify-center items-center lg:mr-[-12px]'>
-          <h2 className='text-black text-xl font-semibold '>{data?.day?.avgtemp_c}°</h2>
+        <div className='flex justify-center items-center lg:mr-[-12px] '>
+          <h2 className='text-black md:text-xl font-semibold text-md'>{data?.day?.avgtemp_c}°</h2>
         </div>
         
         <div className='flex justify-end items-center'>

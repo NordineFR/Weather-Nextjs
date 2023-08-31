@@ -128,7 +128,7 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
                         className=''
                         style={{width:'25%',height:'auto'}}
                       >
-                          <div className={`text-center rounded-lg p-2 w-[85px] ${hourIndex === currentHourIndex ? `${backgroundColor} ${color} [&>img]:invert [&>img]:brightness-0` : ''}`}>
+                          <div className={`text-center rounded-lg p-2 md:w-[85px] w-[75px] ${hourIndex === currentHourIndex ? `${backgroundColor} ${color} [&>img]:invert [&>img]:brightness-0` : ''}`}>
                             <h5 className='text-sm font-medium capitalize mb-1'>{hourIndex === currentHourIndex ? 'Now' : new Date(hourdata.time).toLocaleTimeString('en-US', { hour: '2-digit', hour12: true })}</h5>
                             <img src={hourdata.condition.icon} className="text-center w-[50px] h-[50px] object-cover mx-auto" alt={hourdata.condition.text} />
                             <h4 className='font-semibold  text-md mt-1'>{hourdata.temp_c}°</h4>
