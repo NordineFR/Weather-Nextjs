@@ -80,7 +80,7 @@ export default function Home() {
   
   return (
     <main className="flex-1 flex flex-col xl:flex-row bg-gradient-to-br bg-white overflow-y-auto md:ml-[240px] ml-[70px]">
-    <div className='flex-1 h-full p-6 '>
+    <div className='flex-1 h-full md:p-6 p-3'>
       <SearchBar  setLocation={setLocation} handleSearch={handleSearch} setError={setError}/>
       {loading ? (
         <Loading />
