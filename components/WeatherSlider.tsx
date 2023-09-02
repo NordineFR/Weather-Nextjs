@@ -108,11 +108,14 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
     <Swiper 
                 slidesPerView={3} // For mobile screens
                 breakpoints={{
+                  375: {
+                    slidesPerView: 4,
+                  },
                   640: {
-                    slidesPerView: 2,
+                    slidesPerView: 6,
                   },
                   768: {
-                    slidesPerView: 4,
+                    slidesPerView: 6,
                   },
                   1024: {
                     slidesPerView: 8,
