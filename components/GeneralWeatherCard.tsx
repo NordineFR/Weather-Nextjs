@@ -243,10 +243,21 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             <RenderLineChart color={styles.color} data={categorizedData} />
           </div>
           <Swiper
-            slidesPerView="auto"
+            slidesPerView={2}
+            breakpoints={{
+              640: {
+                slidesPerView: 4,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+            }}
             spaceBetween={0}
             freeMode={true}
-            centeredSlides
+            // centeredSlides
             centeredSlidesBounds
             className="mt-4 w-full"
           >
@@ -255,7 +266,6 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
                 <SwiperSlide
                   key={i}
                   className=""
-                  style={{ width: "25%", height: "auto" }}
                 >
                   <div className="text-center">
                     <h5 className="text-sm capitalize truncate">
