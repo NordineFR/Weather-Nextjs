@@ -1,6 +1,7 @@
 import Loading from '@/app/loading';
 import {useEffect,useState} from 'react'
 import { Swiper,SwiperSlide } from 'swiper/react';
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
 interface Props <T>{
@@ -105,10 +106,24 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
 
   return (
     <Swiper 
-                slidesPerView={4}
+                slidesPerView={3} // For mobile screens
+                breakpoints={{
+                  640: {
+                    slidesPerView: 2,
+                  },
+                  768: {
+                    slidesPerView: 4,
+                  },
+                  1024: {
+                    slidesPerView: 8,
+                  },
+                  1280: {
+                    slidesPerView: 4,
+                  },
+                }}
                 spaceBetween={0}
                 freeMode={true}
-                centeredSlides
+                // centeredSlides
                 centeredSlidesBounds
                 className='mt-4 w-full'
                 initialSlide={0}
@@ -126,7 +141,6 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
                         return(<SwiperSlide 
                         key={i}
                         className=''
-                        style={{width:'25%',height:'auto'}}
                       >
                           <div className={`text-center rounded-lg p-2 md:w-[85px] w-[75px] ${hourIndex === currentHourIndex ? `${backgroundColor} ${color} [&>img]:invert [&>img]:brightness-0` : ''}`}>
                             <h5 className='text-sm font-medium capitalize mb-1'>{hourIndex === currentHourIndex ? 'Now' : new Date(hourdata.time).toLocaleTimeString('en-US', { hour: '2-digit', hour12: true })}</h5>
