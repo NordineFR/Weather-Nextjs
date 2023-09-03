@@ -4,6 +4,9 @@ import { MdOutlineWaterDrop } from "react-icons/md";
 import { PiDropBold } from "react-icons/pi";
 import RenderLineChart from "@/components/RenderLineChart";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import { Autoplay } from 'swiper/modules';
+
 import Loading from "@/app/loading";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -59,7 +62,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
         let color = "";
         let backgroundImage = "";
         let isNight = false;
-        if (localHour >= 21 || localHour < 6) {
+        if (localHour >= 20 || localHour < 6) {
           isNight = true;
           backgroundColor = "#0F1621";
           color = "white";

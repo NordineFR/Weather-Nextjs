@@ -25,7 +25,7 @@ const WeatherSlider = ({data}:Props<Record<string,any>>) => {
     let backgroundColor = "";
     let color = "";
     let isNight = false;
-    if (localHour >= 21 || localHour < 6) {
+    if (localHour >= 20 || localHour < 6) {
       isNight = true;
     }
     switch (weatherStatus) {
