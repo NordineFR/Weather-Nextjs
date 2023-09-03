@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className='flex flex-row min-h-screen'>
           <SideBar />
-          <div className='md:ml-[240px] ml-[70px] w-full h-full'>
+          <div className='md:ml-[240px] ml-[70px] w-full min-h-screen overflow-x-hidden'>
             <Suspense fallback={<Loading className='h-fit p-8'/>}>{children}</Suspense>
           </div>
         </div>

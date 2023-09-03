@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='w-full h-full'></div>
+    <div className='w-full h-full'>weather page</div>
   )
 }
 
