@@ -1,7 +1,6 @@
-
 const page = () => {
   return (
-    <div>Around you</div>
+    <div className='w-full h-full'>weather page</div>
   )
 }
 

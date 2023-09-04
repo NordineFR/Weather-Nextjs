@@ -4,6 +4,9 @@ import { MdOutlineWaterDrop } from "react-icons/md";
 import { PiDropBold } from "react-icons/pi";
 import RenderLineChart from "@/components/RenderLineChart";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import { Autoplay } from 'swiper/modules';
+
 import Loading from "@/app/loading";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -59,31 +62,24 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
         let color = "";
         let backgroundImage = "";
         let isNight = false;
-        if (localHour >= 21 || localHour < 6) {
+        if (localHour >= 20 || localHour < 6) {
           isNight = true;
           backgroundColor = "#0F1621";
           color = "white";
           backgroundImage = "url('/images/clouds.jpg')";
         }
-        // weatherStatus = 1180;
         switch (weatherStatus) {
           case 1000: // Sunny
             backgroundColor = isNight ? "#0F1621" : "#ffd89e";
             color = isNight ? "white" : "#000000";
-            backgroundImage = isNight
-              ? "url('/images/clouds.jpg')"
-              : "url('/images/sunny.jpg')";
+            backgroundImage = isNight ? "url('/images/clouds.jpg')" : "url('/images/sunny.jpg')";
             break;
           case 1003: // Partly cloudy
-            backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-            color = isNight ? "white" : "#24609b";
-            backgroundImage = "url('/images/clouds.jpg')";
-            break;
           case 1006: // Cloudy
           case 1009: // Overcast
             backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
             color = isNight ? "white" : "#24609b";
-            backgroundImage = "url('/images/overcast.jpg')";
+            backgroundImage = "url('/images/clouds.jpg')";
             break;
           case 1135: // Fog
           case 1147: // Freezing fog
@@ -92,38 +88,15 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             color = "white";
             backgroundImage = "url('/images/mist.jpg')";
             break;
-          // backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-          // color = isNight ? "white" : "#24609b";
-          // backgroundImage = "url('/images/overcast.jpg')";
-          // break;
-          case 1063: // Patchy rain possible
           case 1066: // Patchy snow possible
           case 1069: // Patchy sleet possible
           case 1072: // Patchy freezing drizzle possible
-          case 1087: // Thundery outbreaks possible
-            backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
-            color = "white";
-            break;
           case 1114: // Blowing snow
           case 1117: // Blizzard
           case 1150: // Patchy light drizzle
           case 1153: // Light drizzle
           case 1168: // Freezing drizzle
           case 1171: // Heavy freezing drizzle
-            backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
-            color = "white";
-            backgroundImage = "url('/images/snow.jpg')";
-            break;
-          case 1180: // Patchy light rain
-          case 1183: // Light rain
-          case 1186: // Moderate rain at times
-          case 1189: // Moderate rain
-          case 1192: // Heavy rain at times
-          case 1195: // Heavy rain
-            backgroundColor = isNight ? "#0F1621" : "#1e3046";
-            color = isNight ? "white" : "white";
-            backgroundImage = "url('/images/rain.jpg')";
-            break;
           case 1198: // Light freezing rain
           case 1201: // Moderate or heavy freezing rain
           case 1204: // Light sleet
@@ -135,6 +108,17 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           case 1222: // Patchy heavy snow
           case 1225: // Heavy snow
           case 1237: // Ice pellets
+            backgroundColor = isNight ? "#ADB8CB70" : "#ADB8CB";
+            color = "white";
+            backgroundImage = "url('/images/snow.jpg')";
+            break;
+          case 1063: // Patchy rain possible
+          case 1180: // Patchy light rain
+          case 1183: // Light rain
+          case 1186: // Moderate rain at times
+          case 1189: // Moderate rain
+          case 1192: // Heavy rain at times
+          case 1195: // Heavy rain
           case 1240: // Light rain shower
           case 1243: // Moderate or heavy rain shower
           case 1246: // Torrential rain shower
@@ -144,12 +128,20 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           case 1258: // Moderate or heavy snow showers
           case 1261: // Light showers of ice pellets
           case 1264: // Moderate or heavy showers of ice pellets
+          case 1087: // Thundery outbreaks possible
           case 1273: // Patchy light rain with thunder
           case 1276: // Moderate or heavy rain with thunder
           case 1279: // Patchy light snow with thunder
           case 1282: // Moderate or heavy snow with thunder
-            backgroundColor = isNight ? "#0F1621" : "#c4e2ff";
-            color = isNight ? "white" : "#24609b";
+            backgroundColor =  "#1e3046";
+            color = "white";
+            backgroundImage = "url('/images/rain.jpg')";
+            break;
+          case 1285: // Patchy light snow with thunder
+          case 1288: // Moderate or heavy snow with thunder
+            backgroundColor = "#a594f9b3";
+            color = "white";
+            backgroundImage = "url('/images/thunder.jpg')";
             break;
           default:
             backgroundColor = "#c4e2ff";
@@ -157,9 +149,10 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             backgroundImage = "url('/images/clouds.jpg')";
             break;
         }
+        
 
-        resolve({
-          backgroundColor,
+            resolve({
+              backgroundColor,
           color,
           backgroundImage,
         });
@@ -211,52 +204,63 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
       />
       <div className="flex lg:flex-row flex-col justify-center items-center gap-8 h-full ">
         <div className="lg:w-1/2 w-full h-full flex flex-col justify-between items-center">
-          <div className="flex flex-row justify-between items-center w-full">
-            <div className="flex flex-row justify-start items-center ">
+          <div className="flex flex-row justify-between items-center w-full gap-2">
+            <div className="flex flex-row justify-start items-center max-w-[60%]">
               <TbMapPin className="mr-2 text-2xl" />
-              <span className="font-semibold text-xl">
+              <span className="font-semibold text-xl truncate">
                 {data?.location?.name}
               </span>
             </div>
-            <div>Today {formattedTime}</div>
+            <div className=" truncate max-w-[40%]">Today {formattedTime}</div>
           </div>
           <div className="flex flex-col justify-center text-center my-8">
             <div className="flex flex-row justify-center items-center mr-[-20px]">
-              <h1 className="text-9xl text-bold">{data?.current?.temp_c}</h1>
-              <span className="h-full text-[80px] mt-[-60px]">°</span>
+              <h1 className="md:text-9xl text-7xl text-bold">{data?.current?.temp_c}</h1>
+              <span className="h-full md:text-[80px] md:mt-[-60px] text-[40px] mt-[-20px]">°</span>
             </div>
             <h4 className="capitalize font-medium">
               {data?.current?.condition?.text}
             </h4>
           </div>
-          <div className="flex flex-row justify-between items-center  w-full">
-            <div className="flex flex-row justify-start items-center">
+          <div className="flex flex-row  justify-between items-center  w-full gap-2">
+            <div className="flex flex-row justify-start items-center max-w-[50%] truncate">
               <TbWind className="mr-2 text-xl" />
-              <span className="font-medium">
+              <span className="font-medium ">
                 {data?.current?.pressure_mb}hpa
               </span>
             </div>
-            <div className="flex flex-row justify-start items-center">
+            <div className="flex flex-row justify-start items-center max-w-[50%] truncate">
               <PiDropBold className="mr-2 text-xl" />
               <span className="font-medium">{data?.current?.humidity}%</span>
             </div>
-            <div className="flex flex-row justify-start items-center">
+            <div className="flex flex-row justify-start items-center max-w-[50%] truncate">
               <TbMapPin className="mr-2 text-xl" />
               <span className="font-medium">{data?.current?.wind_kph}km/h</span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white lg:w-1/2 w-full h-full p-6 rounded-lg backdrop-opacity-60 bg-opacity-40 flex flex-col justify-between items-center">
+        <div className="bg-white lg:w-1/2 w-full h-full p-6 rounded-lg backdrop-opacity-60 bg-opacity-40 flex flex-col justify-between items-center shadow-md">
           <h3 className="mb-4 w-full text-xl font-semibold">Temperature</h3>
           <div className="py-6  w-full">
             <RenderLineChart color={styles.color} data={categorizedData} />
           </div>
           <Swiper
-            slidesPerView="auto"
+            slidesPerView={2}
+            breakpoints={{
+              640: {
+                slidesPerView: 4,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+            }}
             spaceBetween={0}
             freeMode={true}
-            centeredSlides
+            // centeredSlides
             centeredSlidesBounds
             className="mt-4 w-full"
           >
@@ -265,13 +269,12 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
                 <SwiperSlide
                   key={i}
                   className=""
-                  style={{ width: "25%", height: "auto" }}
                 >
                   <div className="text-center">
-                    <h5 className="text-sm capitalize">
+                    <h5 className="text-sm capitalize truncate">
                       {timeSlotData.timeSlot}
                     </h5>
-                    <h4 className="font-semibold py-2">
+                    <h4 className="font-semibold py-2 md:text-base text-sm">
                       {timeSlotData.temperature}°
                     </h4>
                   </div>

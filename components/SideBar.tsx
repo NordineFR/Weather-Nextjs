@@ -4,20 +4,24 @@ import Image from "next/image";
 import {links} from '@/assets/constants';
 import Link from "next/link";
 import {useState} from 'react';
+import { usePathname } from "next/navigation";
 
 
-const NavLinks = ()=>(
-    <div className="mt-10 md:ml-8 ml-0">
-        {
-            links.map((link)=>(
-                <Link href={link.to} key={link.name} className="flex flex-nowrap overflow-x-hidden md:justify-start justify-center items-center my-8 text-md text-black hover:text-blue-500 font-semibold" >
-                    <link.icon className='w-6 h-6 md:mr-2 block' title={link.name} />
-                    <span className="hidden md:inline whitespace-nowrap">{link.name}</span>
-                </Link>
-            ))
-        }
-    </div>
-)
+const NavLinks = ()=>{
+    const pathname  = usePathname();
+    return (
+        <div className="mt-10 md:ml-8 ml-0">
+            {
+                links.map((link)=>(
+                    <Link href={link.to} key={link.name} className={`flex flex-nowrap overflow-x-hidden md:justify-start justify-center items-center my-8 text-md text-black font-semibold   ${pathname === link.to ? 'text-blue-500 active' : 'text-black hover:text-blue-500'}`} >
+                        <link.icon className='w-6 h-6 md:mr-2 block' title={link.name} />
+                        <span className="hidden md:inline whitespace-nowrap">{link.name}</span>
+                    </Link>
+                ))
+            }
+        </div>
+    )
+}
 
 const SideBar = ()=> {
     const [mobileMenuOpen,setMobileMenuOpen] = useState(false);
