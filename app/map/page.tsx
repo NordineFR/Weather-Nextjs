@@ -1,7 +1,14 @@
-const page = () => {
-  return (
-    <div className='w-full h-full'>weather page</div>
-  )
-}
+"use client"
 
-export default page
+import Map from '@/components/Map'
+
+const Page = () => {
+  return (
+    <div>
+      <Map />
+    </div>
+  );
+};
+
+
+export default Page
