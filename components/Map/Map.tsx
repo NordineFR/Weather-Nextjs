@@ -1,6 +1,8 @@
-import 'leaflet/dist/leaflet.css';
+import ReactDOMServer from 'react-dom/server';
 import React, { useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
+import CustomMarkerIcon from '@/components/Map/CustomMarkerIcon'; 
+import 'leaflet/dist/leaflet.css';
 
 const WeatherMap = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -23,38 +25,34 @@ const WeatherMap = () => {
       });
     }, []);
 
-
-    function createCustomIcon(iconUrl) {
-      const customIconDiv = document.createElement('div');
-      customIconDiv.style.background = 'lightgray'; // Background color
-      customIconDiv.style.width = '40px'; // Width
-      customIconDiv.style.height = '40px'; // Height
-      customIconDiv.style.display = 'flex';
-      customIconDiv.style.justifyContent = 'center';
-      customIconDiv.style.alignItems = 'center';
-
-      const img = document.createElement('img');
-      img.src = iconUrl;
-      img.style.maxWidth = '80%'; // Adjust the max width as needed
-      img.style.maxHeight = '80%'; // Adjust the max height as needed
-
-      customIconDiv.appendChild(img);
-
+    function renderCustomIconToHTML(iconUrl, temperature) {
+      const customIconContent = (
+        <CustomMarkerIcon iconUrl={iconUrl} temperature={temperature} />
+      );
+    
+      const htmlString = ReactDOMServer.renderToStaticMarkup(customIconContent);
+    
+      return htmlString;
+    }
+    function createCustomIcon(iconUrl, temperature) {
+      const customIconHTML = renderCustomIconToHTML(iconUrl, temperature);
+    
       return new L.DivIcon({
-        html: customIconDiv,
+        html: customIconHTML,
         className: 'custom-icon',
-        iconSize: [40, 40], // Adjust the size as needed
+        iconSize: [40, 60], // Adjust the size as needed
       });
     }
+
   return (
     <div>
-      <MapContainer style={{ height: '100vh', width: '100%' }} center={[51.505, -0.09]} zoom={7} scrollWheelZoom={true}>
+      <MapContainer style={{ height: '100vh', width: '100%' }} center={[51.505, -0.09]} minZoom={3} zoom={7} maxZoom={10} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {weatherData && (
-          <Marker position={[weatherData?.location?.lat, weatherData?.location?.lon]} icon={createCustomIcon(weatherData?.current?.condition.icon)}>
+          <Marker position={[weatherData?.location?.lat, weatherData?.location?.lon]} icon={createCustomIcon(weatherData?.current?.condition.icon,weatherData?.current?.temp_c)} >
             <Popup>
               <div>
                 <strong>{weatherData?.location?.name}, {weatherData?.location?.country}</strong><br />
