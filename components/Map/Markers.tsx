@@ -38,8 +38,8 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
   function fetchCitiesWeather (bounds: any, zoom: number){
 
     const apiKey = '7f975775d821f079c63f64436355f924';
-    const bbox = `${bounds[0]},${bounds[1]},${bounds[2]},${bounds[3]}`;
-    // const apiUrl = `https://api.openweathermap.org/data/2.5/find?bbox=${bbox}&appid=${apiKey}`;
+    const bbox = `${bounds[0]},${bounds[1]},${bounds[2]},${bounds[3]},${zoom}`;
+    // const apiUrl = `https://api.openweathermap.org/data/2.5/box/city?bbox=${bbox}&appid=${apiKey}`;
 
     // const apiUrl = `https://api.example.com/weather?bounds=${bounds}&zoom=${zoom}`;
 
