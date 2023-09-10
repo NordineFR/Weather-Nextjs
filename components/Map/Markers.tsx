@@ -43,6 +43,7 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
     const lng2 = bounds.getEast();
 
     const areaSquareDegrees = Math.abs(lat2 - lat1) * Math.abs(lng2 - lng1);
+    console.log('Bounding Box Area (Square Degrees):', areaSquareDegrees);
 
     let adjustedLat1 = lat1;
     let adjustedLat2 = lat2;
@@ -50,24 +51,20 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
     let adjustedLng2 = lng2;
 
     if (areaSquareDegrees > maxAllowedArea) {
-      console.warn('Bounding box area exceeds the allowed limit. Adjusting bounds...');
-
       const allowedArea = maxAllowedArea;
       const adjustedAreaRatio = Math.sqrt(allowedArea / areaSquareDegrees);
       adjustedLat1 = lat1 + (lat2 - lat1) * (1 - adjustedAreaRatio) / 2;
       adjustedLat2 = lat2 - (lat2 - lat1) * (1 - adjustedAreaRatio) / 2;
       adjustedLng1 = lng1 + (lng2 - lng1) * (1 - adjustedAreaRatio) / 2;
       adjustedLng2 = lng2 - (lng2 - lng1) * (1 - adjustedAreaRatio) / 2;
+
+      const areaSquareDegrees1 = Math.abs(adjustedLat2 - adjustedLat1) * Math.abs(adjustedLng2 - adjustedLng1);
+      console.log('Bounding Box Area (Square Degrees):', areaSquareDegrees1);
     }
 
-    const left = bounds._southWest.lng;
-    const bottom = bounds._southWest.lat;
-    const right = bounds._northEast.lng;
-    const top = bounds._northEast.lat;
-    const bbox = `${left},${bottom},${right},${top},${zoom}`;
+    const bbox = `${adjustedLat1},${adjustedLat2},${adjustedLng1},${adjustedLng2},${zoom}`;
     const apiUrl = `https://api.openweathermap.org/data/2.5/box/city?bbox=${bbox}&appid=${process.env.NEXT_PUBLIC_WEATHER_MAP_API_KEY}`;
 
-    // const apiUrl = `https://api.example.com/weather?bounds=${bounds}&zoom=${zoom}`;
 
     return new Promise((resolve, reject) => {
       fetch(apiUrl)
