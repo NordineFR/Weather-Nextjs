@@ -39,13 +39,13 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
 
   function fetchCitiesWeather (bounds: any, zoom: number){
     const maxAllowedArea = 25.00;
-    const lat1 = bounds.getSouth();
-    const lat2 = bounds.getNorth();
-    const lng1 = bounds.getWest();
-    const lng2 = bounds.getEast();
+    const lat1 = bounds._southWest.lat;
+    const lat2 = bounds._northEast.lat;
+    const lng1 = bounds._southWest.lng;
+    const lng2 = bounds._northEast.lng;
 
     const areaSquareDegrees = Math.abs(lat2 - lat1) * Math.abs(lng2 - lng1);
-    console.log('Bounding Box Area (Square Degrees):', areaSquareDegrees);
+    console.log('Bounding Box Area (Square Degrees) 1:', areaSquareDegrees);
 
     let adjustedLat1 = lat1;
     let adjustedLat2 = lat2;
@@ -64,7 +64,7 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
       console.log('Bounding Box Area (Square Degrees):', areaSquareDegrees1);
     }
 
-    const bbox = `${adjustedLat1},${adjustedLat2},${adjustedLng1},${adjustedLng2},${zoom}`;
+    const bbox = `${adjustedLng1},${adjustedLat1},${adjustedLng2},${adjustedLat2},${zoom}`;
     const apiUrl = `https://api.openweathermap.org/data/2.5/box/city?bbox=${bbox}&appid=${process.env.NEXT_PUBLIC_WEATHER_MAP_API_KEY}`;
 
 
