@@ -17,7 +17,9 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
   useEffect(() => {
     // Update visible bounds when the map view changes
     map.on('moveend', () => {
-      setVisibleBounds(map.getBounds());
+      if(map.getZoom() >= 9){
+        setVisibleBounds(map.getBounds());
+      }
     });
   }, [map]);
   
