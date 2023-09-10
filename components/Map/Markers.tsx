@@ -36,10 +36,36 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
     }, [visibleBounds]);
 
   function fetchCitiesWeather (bounds: any, zoom: number){
+    const maxAllowedArea = 25.00;
+    const lat1 = bounds.getSouth();
+    const lat2 = bounds.getNorth();
+    const lng1 = bounds.getWest();
+    const lng2 = bounds.getEast();
 
-    const apiKey = '7f975775d821f079c63f64436355f924';
-    const bbox = `${bounds[0]},${bounds[1]},${bounds[2]},${bounds[3]},${zoom}`;
-    // const apiUrl = `https://api.openweathermap.org/data/2.5/box/city?bbox=${bbox}&appid=${apiKey}`;
+    const areaSquareDegrees = Math.abs(lat2 - lat1) * Math.abs(lng2 - lng1);
+
+    let adjustedLat1 = lat1;
+    let adjustedLat2 = lat2;
+    let adjustedLng1 = lng1;
+    let adjustedLng2 = lng2;
+
+    if (areaSquareDegrees > maxAllowedArea) {
+      console.warn('Bounding box area exceeds the allowed limit. Adjusting bounds...');
+
+      const allowedArea = maxAllowedArea;
+      const adjustedAreaRatio = Math.sqrt(allowedArea / areaSquareDegrees);
+      adjustedLat1 = lat1 + (lat2 - lat1) * (1 - adjustedAreaRatio) / 2;
+      adjustedLat2 = lat2 - (lat2 - lat1) * (1 - adjustedAreaRatio) / 2;
+      adjustedLng1 = lng1 + (lng2 - lng1) * (1 - adjustedAreaRatio) / 2;
+      adjustedLng2 = lng2 - (lng2 - lng1) * (1 - adjustedAreaRatio) / 2;
+    }
+
+    const left = bounds._southWest.lng;
+    const bottom = bounds._southWest.lat;
+    const right = bounds._northEast.lng;
+    const top = bounds._northEast.lat;
+    const bbox = `${left},${bottom},${right},${top},${zoom}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/box/city?bbox=${bbox}&appid=${process.env.NEXT_PUBLIC_WEATHER_MAP_API_KEY}`;
 
     // const apiUrl = `https://api.example.com/weather?bounds=${bounds}&zoom=${zoom}`;
 
