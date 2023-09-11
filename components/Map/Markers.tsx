@@ -34,7 +34,6 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
     fetchCitiesWeather(bounds,zoom).then((data: any) => {
       setCloseWeatherData(data.list);
       Array.isArray(data.list) ?setCloseWeatherData(data.list) : console.error('Invalid data structure received:', data);
-      console.log(data.list);
     });
     }, [visibleBounds]);
 
