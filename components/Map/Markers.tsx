@@ -10,7 +10,7 @@ interface Props<T> {
 }
 
 const Markers = ({ weatherData }:Props<Record<string, any>>) => {
-  const [closeWeatherData, setCloseWeatherData] = useState(null);
+  const [closeWeatherData, setCloseWeatherData] = useState<any[]>([]);
   const [visibleBounds, setVisibleBounds] = useState(null);
   const map = useMap();
 
@@ -30,10 +30,11 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
     const buffer = 0.2; // Adjust the buffer distance
     const bounds = visibleBounds.pad(buffer);
     const zoom = map.getZoom();
-    console.log(bounds);
     // Fetch weather data for cities within the bounding box
     fetchCitiesWeather(bounds,zoom).then((data: any) => {
-      setCloseWeatherData(data);
+      setCloseWeatherData(data.list);
+      Array.isArray(data.list) ?setCloseWeatherData(data.list) : console.error('Invalid data structure received:', data);
+      console.log(data.list);
     });
     }, [visibleBounds]);
 
@@ -102,18 +103,27 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
 
   return (
     <>
-      {weatherData && (
-          <Marker position={[weatherData?.location?.lat, weatherData?.location?.lon]} icon={createCustomIcon(weatherData?.current?.condition.icon,weatherData?.current?.temp_c)} >
+      {Array.isArray(closeWeatherData) &&
+        closeWeatherData.map((cityData: any) => (
+          <Marker
+            key={cityData.id} // You should use a unique key here
+            position={[cityData.coord.Lat, cityData.coord.Lon]}
+            icon={createCustomIcon(cityData.weather[0].icon, cityData.main.temp)}
+          >
             <Popup>
               <div>
-                <strong>{weatherData?.location?.name}, {weatherData?.location?.country}</strong><br />
-                Temperature: {weatherData?.current?.temp_c}°C<br />
-                Weather: {weatherData?.current?.condition.text}
-                <img src="" />
+                <strong>
+                  {cityData.name}
+                </strong>
+                <br />
+                Temperature: {cityData.main.temp}°C
+                <br />
+                Weather: {cityData.weather[0].description}
+                <img src="" alt="Weather icon" />
               </div>
             </Popup>
           </Marker>
-        )}
+        ))}
     </>
   )
 }
