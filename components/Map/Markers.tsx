@@ -112,6 +112,7 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
           >
             <Popup>
               <div>
+                <img src={`https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`} alt="Weather icon" className='text-center mx-auto '/>
                 <strong>
                   {cityData.name}
                 </strong>
@@ -119,7 +120,6 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
                 Temperature: {cityData.main.temp}°C
                 <br />
                 Weather: {cityData.weather[0].description}
-                <img src="" alt="Weather icon" />
               </div>
             </Popup>
           </Marker>
