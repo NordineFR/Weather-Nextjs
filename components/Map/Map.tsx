@@ -7,24 +7,24 @@ import L from 'leaflet';
 import Markers from './Markers';
 
 const WeatherMap = () => {
-  const [weatherData, setWeatherData] = useState(null);
+  // const [weatherData, setWeatherData] = useState(null);
   
-    useEffect(() => {
-      const city = 'London'; // Replace with the desired city or location.
-      fetch(`https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${city}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setWeatherData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching weather data:', error);
-        });
-    }, []);
+    // useEffect(() => {
+    //   const city = 'London'; // Replace with the desired city or location.
+    //   fetch(`https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${city}`)
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       setWeatherData(data);
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error fetching weather data:', error);
+    //     });
+    // }, []);
     
     function createCustomIcon(iconUrl: any, temperature: any) {
       const customIconContent = (
@@ -47,21 +47,7 @@ const WeatherMap = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* {weatherData && (
-          <Marker position={[weatherData?.location?.lat, weatherData?.location?.lon]} icon={createCustomIcon(weatherData?.current?.condition.icon,weatherData?.current?.temp_c)} >
-            <Popup>
-              <div>
-                <strong>{weatherData?.location?.name}, {weatherData?.location?.country}</strong><br />
-                Temperature: {weatherData?.current?.temp_c}°C<br />
-                Weather: {weatherData?.current?.condition.text}
-                <img src="" />
-              </div>
-            </Popup>
-          </Marker>
-        )} */}
-        {weatherData && (
-        <Markers weatherData={weatherData} />
-        )}
+        <Markers />
       </MapContainer>
     </div>
   );

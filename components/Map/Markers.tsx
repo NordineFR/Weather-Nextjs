@@ -5,11 +5,7 @@ import CustomMarkerIcon from '@/components/Map/CustomMarkerIcon';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-interface Props<T> {
-  weatherData?:T;
-}
-
-const Markers = ({ weatherData }:Props<Record<string, any>>) => {
+const Markers = () => {
   const [closeWeatherData, setCloseWeatherData] = useState<any[]>([]);
   const [visibleBounds, setVisibleBounds] = useState(null);
   const map = useMap();
@@ -45,7 +41,6 @@ const Markers = ({ weatherData }:Props<Record<string, any>>) => {
     const lng2 = bounds._northEast.lng;
 
     const areaSquareDegrees = Math.abs(lat2 - lat1) * Math.abs(lng2 - lng1);
-    console.log('Bounding Box Area (Square Degrees) 1:', areaSquareDegrees);
 
     let adjustedLat1 = lat1;
     let adjustedLat2 = lat2;
