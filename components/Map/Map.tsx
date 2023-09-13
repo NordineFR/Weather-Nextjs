@@ -1,6 +1,6 @@
 import ReactDOMServer from 'react-dom/server';
 import React, { useEffect, useState } from 'react';
-import { MapContainer, Marker, TileLayer, Popup ,useMap} from 'react-leaflet';
+import { MapContainer, Marker, TileLayer, Popup ,useMap,AttributionControl } from 'react-leaflet';
 import CustomMarkerIcon from '@/components/Map/CustomMarkerIcon'; 
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -25,7 +25,6 @@ const WeatherMap = () => {
     //       console.error('Error fetching weather data:', error);
     //     });
     // }, []);
-    
     function createCustomIcon(iconUrl: any, temperature: any) {
       const customIconContent = (
         <CustomMarkerIcon iconUrl={iconUrl} temperature={temperature} />
@@ -42,9 +41,11 @@ const WeatherMap = () => {
 
   return (
     <div>
-      <MapContainer style={{ height: '100vh', width: '100%' }} center={[51.505, -0.09]} minZoom={3} zoom={7} maxZoom={10} scrollWheelZoom={true}>
+      <MapContainer style={{ height: '100vh', width: '100%' }} center={[51.505, -0.09]} minZoom={3} zoom={7} maxZoom={10} scrollWheelZoom={true} attributionControl={false}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution='&copy; <a href="https://github.com/NordineFR" target="_blank">NordineFR</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Markers />
