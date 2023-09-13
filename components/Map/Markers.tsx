@@ -4,6 +4,7 @@ import { MapContainer, Marker, TileLayer, Popup ,useMap} from 'react-leaflet';
 import CustomMarkerIcon from '@/components/Map/CustomMarkerIcon'; 
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { HiOutlineMap } from 'react-icons/hi';
 
 const Markers = () => {
   const [closeWeatherData, setCloseWeatherData] = useState<any[]>([]);
@@ -30,6 +31,7 @@ const Markers = () => {
     fetchCitiesWeather(bounds,zoom).then((data: any) => {
       setCloseWeatherData(data.list);
       Array.isArray(data.list) ?setCloseWeatherData(data.list) : console.error('Invalid data structure received:', data);
+      console.log(closeWeatherData);
     });
     }, [visibleBounds]);
 
@@ -102,18 +104,29 @@ const Markers = () => {
           <Marker
             key={cityData.id} // You should use a unique key here
             position={[cityData.coord.Lat, cityData.coord.Lon]}
-            icon={createCustomIcon(cityData.weather[0].icon, cityData.main.temp)}
+            icon={createCustomIcon(cityData.weather[0].icon, cityData.main.temp.toFixed(1))}
           >
-            <Popup>
-              <div>
-                <img src={`https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`} alt="Weather icon" className='text-center mx-auto '/>
-                <strong>
+            <Popup className='min-w-[150px]'>
+              <div className='text-center '>
+                <strong className='text-xl font-bold'>
                   {cityData.name}
                 </strong>
                 <br />
-                Temperature: {cityData.main.temp}°C
-                <br />
-                Weather: {cityData.weather[0].description}
+                <span className='font-medium'>
+                {cityData.weather[0].description}
+                </span> 
+                <div className='flex justify-between items-center gap-2  my-3'>
+                  <img src={`https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`} alt="Weather icon" className='m-[-13px]' />
+                  <span className='text-[15px] font-bold'>
+                    {cityData.main.temp.toFixed(1)} °C
+                  </span>
+                </div>
+                <div className='text-left'>
+                  <span>Humidity: {cityData.main.humidity}%</span><br />
+                  <span>Wind Speed: {cityData.wind.speed} m/s</span><br />
+                  <span>Pressure: {cityData.main.pressure} hPa</span>
+                </div>
+                {/* Weather: {cityData.weather[0].description} */}
               </div>
             </Popup>
           </Marker>
