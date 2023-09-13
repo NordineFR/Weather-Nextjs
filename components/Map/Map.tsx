@@ -41,7 +41,7 @@ const WeatherMap = () => {
 
   return (
     <div>
-      <MapContainer style={{ height: '100vh', width: '100%' }} center={[51.505, -0.09]} minZoom={3} zoom={7} maxZoom={10} scrollWheelZoom={true} attributionControl={false}>
+      <MapContainer style={{ height: '100vh', width: '100%' }} center={[33.5905, -7.6163]} minZoom={3} zoom={5} maxZoom={10} scrollWheelZoom={true} attributionControl={false}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
         <TileLayer
