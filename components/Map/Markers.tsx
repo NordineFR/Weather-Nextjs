@@ -31,7 +31,6 @@ const Markers = () => {
     fetchCitiesWeather(bounds,zoom).then((data: any) => {
       setCloseWeatherData(data.list);
       Array.isArray(data.list) ?setCloseWeatherData(data.list) : console.error('Invalid data structure received:', data);
-      console.log(closeWeatherData);
     });
     }, [visibleBounds]);
 
@@ -58,7 +57,7 @@ const Markers = () => {
       adjustedLng2 = lng2 - (lng2 - lng1) * (1 - adjustedAreaRatio) / 2;
 
       const areaSquareDegrees1 = Math.abs(adjustedLat2 - adjustedLat1) * Math.abs(adjustedLng2 - adjustedLng1);
-      console.log('Bounding Box Area (Square Degrees):', areaSquareDegrees1);
+      // console.log('Bounding Box Area (Square Degrees):', areaSquareDegrees1);
     }
 
     const bbox = `${adjustedLng1},${adjustedLat1},${adjustedLng2},${adjustedLat2},${zoom}`;
