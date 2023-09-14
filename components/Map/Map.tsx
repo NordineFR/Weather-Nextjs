@@ -42,10 +42,12 @@ const WeatherMap = () => {
   return (
     <div>
       <MapContainer style={{ height: '100vh', width: '100%' }} center={[33.5905, -7.6163]} minZoom={3} zoom={5} maxZoom={10} scrollWheelZoom={true} attributionControl={false}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <AttributionControl
+          position="bottomright"
+          prefix={`Developed by Me | &copy; <a href="https://github.com/NordineFR" target="_blank">NordineFR</a>`}
+        />
 
         <TileLayer
-          attribution='&copy; <a href="https://github.com/NordineFR" target="_blank">NordineFR</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Markers />
