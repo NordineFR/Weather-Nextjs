@@ -44,7 +44,7 @@ const WeatherMap = () => {
       <MapContainer style={{ height: '100vh', width: '100%' }} center={[33.5905, -7.6163]} minZoom={3} zoom={5} maxZoom={10} scrollWheelZoom={true} attributionControl={false}>
         <AttributionControl
           position="bottomright"
-          prefix={`Developed by Me | &copy; <a href="https://github.com/NordineFR" target="_blank">NordineFR</a>`}
+          prefix={`Developed by <a href="https://github.com/NordineFR" target="_blank">NordineFR</a>`}
         />
 
         {/* <TileLayer
