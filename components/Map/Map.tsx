@@ -47,6 +47,9 @@ const WeatherMap = () => {
           prefix={`Developed by Me | &copy; <a href="https://github.com/NordineFR" target="_blank">NordineFR</a>`}
         />
 
+        {/* <TileLayer
+          url="https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=d277085ea6d54ed3bd64d999acfdb838"
+        /> */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
