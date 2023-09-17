@@ -89,10 +89,10 @@ export default function Home() {
           <div>
             <GeneralWeatherCard data={data}/>
             <div className='grid gap-6 md:grid-cols-2 grid-cols-1'>
-              <WindCard windDirection={data?.current?.wind_degree} title='Wind' desc='Today wind speed' value={`${data?.current?.wind_kph}km/h`} type='wind' />
-              <WindCard title='Rain Chance' desc='Today rain chance' value={`${data?.forecast?.forecastday[0]?.day.daily_chance_of_rain}%`} type='rain' />
-              <WindCard title='Pressure' desc='Today Pressure' value={`${data?.current?.pressure_mb} hpa`} type='pressure' />
-              <WindCard title='UV Index' desc='Today UV Index' value={data?.current?.uv} type='uvi' />
+              <WindCard windDirection={(data as any)?.current?.wind_degree} title='Wind' desc='Today wind speed' value={`${(data as any)?.current?.wind_kph}km/h`} type='wind' />
+              <WindCard title='Rain Chance' desc='Today rain chance' value={`${(data as any)?.forecast?.forecastday[0]?.day.daily_chance_of_rain}%`} type='rain' />
+              <WindCard title='Pressure' desc='Today Pressure' value={`${(data as any)?.current?.pressure_mb} hpa`} type='pressure' />
+              <WindCard title='UV Index' desc='Today UV Index' value={(data as any)?.current?.uv} type='uvi' />
             </div>
           </div>
         ) : (error ? (
