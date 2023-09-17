@@ -5,10 +5,11 @@ import CustomMarkerIcon from '@/components/Map/CustomMarkerIcon';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { HiOutlineMap } from 'react-icons/hi';
+import { LatLngBounds } from 'leaflet';
 
 const Markers = () => {
   const [closeWeatherData, setCloseWeatherData] = useState<any[]>([]);
-  const [visibleBounds, setVisibleBounds] = useState(null);
+  const [visibleBounds, setVisibleBounds] = useState<LatLngBounds | null>(null);
   const map = useMap();
 
   useEffect(() => {
