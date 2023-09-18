@@ -15,7 +15,7 @@ type Styles = {
   backgroundColor: string;
   color: string;
   backgroundImage: string;
-  filter:string;
+  filter: string;
 };
 interface Props<T> {
   data: T;
@@ -92,6 +92,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
             color = "white";
             backgroundImage = "url('/images/mist.jpg')";
+            filter = "grayscale(0)";
             break;
           case 1066: // Patchy snow possible
           case 1069: // Patchy sleet possible
@@ -141,12 +142,14 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             backgroundColor =  "#1e3046";
             color = "white";
             backgroundImage = "url('/images/rain.jpg')";
+            filter = "grayscale(0)";
             break;
           case 1285: // Patchy light snow with thunder
           case 1288: // Moderate or heavy snow with thunder
             backgroundColor = "#a594f9b3";
             color = "white";
             backgroundImage = "url('/images/thunder.jpg')";
+            filter = "grayscale(0)";
             break;
           default:
             backgroundColor = "#c4e2ff";
