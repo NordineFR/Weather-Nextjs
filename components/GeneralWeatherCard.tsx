@@ -15,6 +15,7 @@ type Styles = {
   backgroundColor: string;
   color: string;
   backgroundImage: string;
+  filter: string;
 };
 interface Props<T> {
   data: T;
@@ -26,6 +27,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
     backgroundColor: "",
     color: "",
     backgroundImage: "",
+    filter:"",
   });
 
   const weatherStatus = data?.current?.condition?.code;
@@ -39,6 +41,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
           backgroundColor: weatherStyles.backgroundColor,
           color: weatherStyles.color,
           backgroundImage: weatherStyles.backgroundImage,
+          filter: weatherStyles.filter,
         };
         setStyles(colorStyle);
         setLoading(false);
@@ -61,12 +64,14 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
         let backgroundColor = "";
         let color = "";
         let backgroundImage = "";
+        let filter = "grayscale(0)";
         let isNight = false;
         if (localHour >= 20 || localHour < 6) {
           isNight = true;
           backgroundColor = "#0F1621";
           color = "white";
           backgroundImage = "url('/images/clouds.jpg')";
+          filter = "grayscale(1)";
         }
         switch (weatherStatus) {
           case 1000: // Sunny
@@ -87,6 +92,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             backgroundColor = isNight ? "#0F1621" : "#ADB8CB";
             color = "white";
             backgroundImage = "url('/images/mist.jpg')";
+            filter = "grayscale(0)";
             break;
           case 1066: // Patchy snow possible
           case 1069: // Patchy sleet possible
@@ -136,12 +142,14 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
             backgroundColor =  "#1e3046";
             color = "white";
             backgroundImage = "url('/images/rain.jpg')";
+            filter = "grayscale(0)";
             break;
           case 1285: // Patchy light snow with thunder
           case 1288: // Moderate or heavy snow with thunder
             backgroundColor = "#a594f9b3";
             color = "white";
             backgroundImage = "url('/images/thunder.jpg')";
+            filter = "grayscale(0)";
             break;
           default:
             backgroundColor = "#c4e2ff";
@@ -155,6 +163,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
               backgroundColor,
           color,
           backgroundImage,
+              filter,
         });
       }, 1000);
     });
@@ -200,7 +209,7 @@ const GeneralWeather = ({ data }: Props<Record<string, any>>) => {
     >
       <div
         className="absolute inset-0 opacity-100 bg-cover mix-blend-soft-light"
-        style={{ backgroundImage: styles.backgroundImage }}
+        style={{ backgroundImage: styles.backgroundImage,filter: styles.filter}}
       />
       <div className="flex lg:flex-row flex-col justify-center items-center gap-8 h-full ">
         <div className="lg:w-1/2 w-full h-full flex flex-col justify-between items-center">
