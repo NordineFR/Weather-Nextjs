@@ -7,7 +7,8 @@
   </a>
 </p>
 
-![Preview](Weather-Nextjs-preview.gif)
+![Preview](https://github.com/NordineFR/Weather-Nextjs/assets/57439910/5f55a3aa-ad07-4da9-9780-35a0d437417c)
+
 
 ## Live Preview
 Check out the live preview of the app: [Live Preview](https://weather-nextjs-plum.vercel.app/)
