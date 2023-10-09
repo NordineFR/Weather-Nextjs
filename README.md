@@ -7,7 +7,8 @@
   </a>
 </p>
 
-![Preview](https://github.com/NordineFR/Weather-Nextjs/assets/57439910/5f55a3aa-ad07-4da9-9780-35a0d437417c)
+![Preview](https://github.com/NordineFR/Weather-Nextjs/assets/57439910/a47757d7-187e-48be-a662-e44a292554a9)
+
 
 
 ## Live Preview
